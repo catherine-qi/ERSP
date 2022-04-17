@@ -176,7 +176,7 @@
                 "date": ["Monday, July 12th", "12PM-1PM EDT"]
             },
             {
-                "name": "2D - Time Matters",
+                "name": "Session 2D - Time Matters",
                 "paper titles": [
                     "Event Occurrence Date Estimation based on Multivariate Time Series Analysis over Temporal Document Collections", 
                     "(TOIS) Towards Dynamic User Intention: Temporal Evolutionary Effects of Item Relations in Sequential Recommendation",
@@ -196,7 +196,7 @@
                 "date": ["Monday, July 12th", "12PM-1PM EDT"]
             },
             {
-                "name": "2E - Question Answering",
+                "name": "Session 2E - Question Answering",
                 "paper titles": [
                     "(TOIS) Meaningful Answer Generation of E-Commerce Question-Answering", 
                     "Answer Complex Questions: Path Ranker Is All You Need",
@@ -216,7 +216,7 @@
                 "date": ["Monday, July 12th", "12PM-1PM EDT"]
             },
             {
-                "name": "2F - Applications 2",
+                "name": "Session 2F - Applications 2",
                 "paper titles": [
                     "(TOIS) VM-NSP: Vertical Negative Sequential Pattern Mining with Loose Negative Element Constraints", 
                     "(TOIS) DGeye: Probabilistic Risk Perception and Prediction for Urban Dangerous Goods Management",
@@ -234,6 +234,382 @@
                     ["Graham McDonald", "Craig MacDonald", "Iadh Ounis"]
                 ],
                 "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            },
+            {
+                "name": "Poster Session 1, Round 1",
+                "paper titles": [
+                    "Federated Cross-Modal Retrieval", 
+                    "On the Two-Sample Randomisation Test for IR Evaluation",
+                    "Identifying Queries in Instant Search Logs",
+                    "Learning Passage Impacts for Inverted Indexes",
+                    "Entity Retrieval Using Fine-Grained Entity Aspects",
+                    "Is Query Performance Prediction With Multiple Query Variations Harder Than Topic Performance Prediction?",
+                    "Evaluating the Predictivity of IR Experiments",
+                    "Text-to-Text Multi-view Learning for Passage Re-ranking",
+                    "Web Document Encoding for Structure-Aware Keyphrase Extraction",
+                    "Synthetic Target Domain Supervision for Open Retrieval QA",
+                    "Gazetteer Enhanced Named Entity Recognition for Code-Mixed Web Queries",
+                    "Learning Robust Dense Retrieval Models from Incomplete Relevance Labels",
+                    "Investigating Session Search Behavior with Knowledge Graphs",
+                    "On the Orthogonality of Bias and Utility in Ad hoc Retrieval",
+                    "Passage Retrieval for Outside-Knowledge Visual Question Answering",
+                    "Joint Learning of Deep Retrieval Model and Product Quantization based Embedding Index",
+                    "Predicting Links on Wikipedia with Anchor Text Information",
+                    "An ALBERT-based Similarity Measure for Mathematical Answer Retrieval",
+                    "Significant Improvements over the State of the Art? A Case Study of the MS MARCO Document Ranking Leaderboard",
+                    "Improving Transformer-Kernel Ranking Model Using Conformer and Query Term Independence",
+                    "Conversational vs Traditional: Comparing Search Behavior and Outcome in Legal Case Retrieval",
+                    "Contextualized Offline Relevance Weighting for Efficient and Effective Neural Retrieval",
+                    "An Exploration of Tester-based Evaluation of User Simulators for Comparing Interactive Retrieval Systems",
+                    "Propensity-Independent Bias Recovery in Offline Learning-to-rank Systems",
+                    "Lighter and Better: Low-Rank Decomposed Self-Attention Networks for Next-Item Recommendation",
+                    "Underestimation Refinement: A General Enhancement Strategy for Exploration in Recommendation Systems",
+                    "Counterfactual Explanations for Neural Recommenders",
+                    "Attentive Multi-field Matching for News Recommendation",
+                    "De-Biased Modeling of Search Click Behavior with Reinforcement Learning",
+                    "Info-flow Enhanced GANs for Recommender",
+                    "Transfer-Meta Framework for Cross-domain Recommendation to Cold-Start Users",
+                    "Entangled Bidirectional Encoder to Autoregressive Decoder for Sequential Recommendation",
+                    "Revisiting the Tag Relevance Prediction Problem",
+                    "News Recommendation via Recurrent Reasoning Memory Network over BERT",
+                    "Cross-Batch Negative Sampling for Training Two-Tower Recommenders",
+                    "Cluster-Based Bandits: Fast Cold-Start for Recommender System New Users",
+                    "Augmenting Sequential Recommendation with Pseudo-Prior Items via Reversely Pre-training Transformer",
+                    "APRF-Net: Attentive Pseudo-Relevance Feedback Network for Query Categorization",
+                    "Social Recommendation with Implicit Social Influence",
+                    "Neural Representations in Hybrid Recommender Systems: Prediction versus Regularization",
+                    "ICAI-SR: Item Categorical Attribute Integrated Sequential Recommendation",
+                    "Empowering News Recommendation with Pre-trained Language Models",
+                    "Sequential Recommendation for Cold-start Users with Meta Transitional Learning",
+                    "The Winner Takes it All: Geographic Imbalance and Provider (Un)fairness in Educational Recommender Systems",
+                    "Temporal Augmented Graph Neural Networks for Session-Based Recommendations",
+                    "Motif-aware Sequential Recommendation",
+                    "Dual Unbiased Recommender Learning for Implicit Feedback",
+                    "Hyperbolic Online Time Stream Modeling",
+                    "How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset",
+                    "TREC Deep Learning Track: Reusable Test Collections in the Large Data Regime",
+                    "Pyserini: A Python Toolkit for Reproducible Information Retrieval Research with Sparse and Dense Representations",
+                    "WWW3E8: 259,000 Relevance Labels for Studying the Effect of Document Presentation Order for Relevance Assessors",
+                    "REGIS: A Test Collection for Geoscientific Documents in Portuguese",
+                    "Morphologically Annotated Amharic Text Corpora",
+                    "LeCaRD: A Legal Case Retrieval Dataset for Chinese Law System",
+                    "A Multilingual Dataset for Named Entity Recognition EntityLinking and Stance Detection in Historical Newspapers",
+                    "DarkJargon.net: A Platform for Understanding Underground Conversation with Latent Meaning",
+                    "PYA0: A Python Toolkit for Accessible Math-Aware Search",
+                    "OpenMatch: An Open Source Library for Neu-IR Research",
+                    "Precision Medicine Search for Paediatric Oncology",
+                    "The Information Retrieval Anthology",
+                    "Chatty Goose: A Python Framework for Conversational Search",
+                    "QuARk: A GUI for Quality-Aware Ranking of Arguments",
+                    "Towards Question-Based High-Recall Information Retrieval: Locating the Last Few Relevant Documents for Technology Assisted Reviews"
+                ],
+                "authors": [
+                    ["Linlin Zong", "Qiujie Xie", "Jiahui Zhou", "Peiran Wu", "Xianchao Zhang", "Bo Xu"],
+                    ["Tetsuya Sakai"],
+                    ["Markus Fischer", "Kristof Komlossy", "Benno Stein", "Martin Potthast", "Matthias Hagen"],
+                    ["Antonio Mallia", "Omar Khattab", "Torsten Suel", "Nicola Tonellotto"],
+                    ["Shubham Chatterjee", "Laura Dietz"],
+                    ["Oleg Zendel", "Shane Culpepper", "Falk Scholer"],
+                    ["Lida Rashidi", "Justin Zobel", "Alistair Moffat"],
+                    ["Jia-Huei Ju", "Jheng-Hong Yang", "Chuan-Ju Wang"],
+                    ["Jihyuk Kim", "Young-In Song", "Seung-won Hwang"],
+                    ["Revanth Gangi Reddy", "Bhavani Iyer", "Md Arafat Sultan", "Rong Zhang", "Avi Sil", "Vittorio Castelli", "Radu Florian", "Salim Roukos"],
+                    ["Besnik Fetahu", "Shervin Malmasi", "Anjie Fang", "Oleg Rokhlenko"],
+                    ["Prafull Prakash", "Julian Killingback", "Hamed Zamani"],
+                    ["Xiangsheng Li", "Maarten de Rijke", "Yiqun Liu", "Jiaxin Mao", "Weizhi Ma", "Min Zhang", "Shaoping Ma"],
+                    ["Amin Bigdeli", "Negar Arabzadeh", "Shirin Seyedsalehi", "Morteza Zihayat", "Ebrahim Bagheri"],
+                    ["Chen Qu", "Hamed Zamani", "Liu Yang", "W. Bruce Croft", "Erik Learned-Miller"],
+                    ["Han Zhang", "Hongwei Shen", "Yiming Qiu", "Yunjiang Jiang", "Songlin Wang", "Sulong Xu", "Yun Xiao", "Bo Long", "Wen-Yun Yang"],
+                    ["Robin Brochier", "Frédéric Béchet"],
+                    ["Anja Reusch", "Maik Thiele", "Wolfgang Lehner"],
+                    ["Jimmy Lin", "Daniel Campos", "Nick Craswell", "Bhaskar Mitra", "Emine Yilmaz"],
+                    ["Bhaskar Mitra", "Sebastian Hofstätter", "Hamed Zamani", "Nick Craswell"],
+                    ["Bulou Liu", "Yueyue Wu", "Yiqun Liu", "Fan Zhang", "Yunqiu Shao", "Chenliang Li", "Min Zhang", "Shaoping Ma"],
+                    ["Xuanang Chen", "Ben He", "Kai Hui", "Yiran Wang", "Le Sun", "Yingfei Sun"],
+                    ["Sahiti Labhishetty", "Chengxiang Zhai"],
+                    ["Zohreh Ovaisi", "Kathryn Vasilaky", "Elena Zheleva"],
+                    ["Yang Fang", "Xiang Zhao", "Yifan Chen", "Weidong Xiao", "Maarten de Rijke"],
+                    ["Yuhai Song", "Lu Wang", "Haoming Dang", "Weiwei Zhou", "Jing Guan", "Xiwei Zhao", "Changping Peng", "Yongjun Bao", "Jingping Shao"],
+                    ["Khanh Hiep Tran", "Azin Ghazimatin", "Rishiraj Saha Roy"],
+                    ["Qi Zhang", "Qinglin Jia", "Chuyuan Wang", "Jingjie Li", "Zhaowei Wang", "Xiuqiang He"],
+                    ["Jianghong Zhou", "Sayyed Zahiri", "Simon Hughes", "Surya Kallumadi", "Khalifeh Al Jadda", "Eugene Agichtein"],
+                    ["Yuan Lin", "Zhang Xie", "Bo Xu", "Kan Xu", "Hongfei Lin"],
+                    ["Yongchun Zhu", "Kaikai Ge", "Fuzhen Zhuang", "Ruobing Xie", "Dongbo Xi", "Xu Zhang", "Leyu Lin", "Qing He"],
+                    ["Taegwan Kang", "Hwanhee Lee", "Byeongjin Choe", "Kyomin Jung"],
+                    ["Denis Kotkov", "Alexandr Maslov", "Mats Neovius"],
+                    ["Qinglin Jia", "Jingjie Li", "Qi Zhang", "Xiuqiang He", "Jieming Zhu"],
+                    ["Jinpeng Wang", "Jieming Zhu", "Xiuqiang He"],
+                    ["Sulthana Shams", "Daron Anderson", "Douglas Leith"],
+                    ["Zhiwei Liu", "Ziwei Fan", "Yu Wang", "Philip S. Yu"],
+                    ["Ali Ahmadvand", "Sayyed Zahiri", "Simon Hughes", "Khalifeh Al Jadda", "Surya Kallumadi", "Eugene Agichtein"],
+                    ["Changhao Song", "Bo Wang", "Qinxue Jiang", "Ruifang He", "Yuexian Hou"],
+                    ["Ramin Raziperchikolaei", "Tianyu Li", "Young-joo Chung"],
+                    ["Xu Yuan", "Dongsheng Duan", "Lingling Tong", "Lei Shi", "Cheng Zhang"],
+                    ["Chuhan Wu", "Fangzhao Wu", "Tao Qi", "Yongfeng Huang"],
+                    ["Jianling Wang", "Kaize Ding", "James Caverlee"],
+                    ["Elizabeth Gómez", "Carlos Shui Zhang", "Ludovico Boratto", "Maria Salamo", "Mirko Marras"],
+                    ["Huachi Zhou", "Qiaoyu Tan", "Xiao Huang", "Kaixiong Zhou", "Xiaoling Wang"],
+                    ["Zeyu Cui", "Yinjiang Cai", "Shu Wu", "Xibo Ma", "Liang Wang"],
+                    ["Jae-woong Lee"],
+                    ["Ramit Sawhney", "Shivam Agarwal", "Megh Thakkar", "Arnav Wadhwa", "Rajiv Shah"],
+                    ["Jeff Dalton", "Iain Mackie", "Andrew Yates"],
+                    ["Nick Craswell", "Bhaskar Mitra", "Emine Yilmaz", "Daniel Campos", "Ellen Voorhees", "Ian Soboroff"],
+                    ["Jimmy Lin", "Xueguang Ma", "Sheng-Chieh Lin", "Jheng-Hong Yang", "Ronak Pradeep", "Rodrigo Nogueira"],
+                    ["Tetsuya Sakai", "Sijie Tao", "Zhaohao Zeng"],
+                    ["Lucas L. Oliveira", "Viviane P. Moreira", "Regis K. Romeu"],
+                    ["Tilahun Yeshambel", "Josiane Mothe", "Yaregal Assabie"],
+                    ["Yixiao Ma", "Yunqiu Shao", "Yueyue Wu", "Yiqun Liu", "Ruizhe Zhang", "Min Zhang", "Shaoping Ma"],
+                    ["Ahmed Hamdi", "Elvys Linhares Pontes", "Emanuela Boros", "Thi Tuyet Hai Nguyen", "Günter Hackl", "Jose G. Moreno", "Antoine Doucet"],
+                    ["Dominic Seyler", "Wei Liu", "Yunan Zhang", "Xiaofeng Wang", "Chengxiang Zhai"],
+                    ["Wei Zhong", "Jimmy Lin"],
+                    ["Zhenghao Liu", "Kaitao Zhang", "Chenyan Xiong", "Zhiyuan Liu", "Maosong Sun"],
+                    ["Bevan Koopman", "Tracey Wright", "Natacha Omer", "Veronica McCabe", "Guido Zuccon"],
+                    ["Martin Potthast", "Sebastian Günther", "Janek Bevendorff", "Jan Philipp Bittner", "Alexander Bondarenko", "Maik Fröbe", "Christian Kahmann", "Andreas Niekler", "Michael Völske", "Benno Stein", "Matthias Hagen"],
+                    ["Edwin Zhang", "Sheng-Chieh Lin", "Jheng-Hong Yang", "Ronak Pradeep", "Rodrigo Nogueira", "Jimmy Lin"],
+                    ["Markus Nilles", "Lorik Dumani", "Ralf Schenkel"],
+                    ["Jie Zou", "Evangelos Kanoulas"]
+                ],
+                "date": ["Monday, July 12th", "1PM-2PM EDT"]
+            },
+            {
+                "name": "Session 3A - Conversational IR 1",
+                "paper titles": [
+                    "Initiative-Aware Self-Supervised learning for Knowledge-Grounded Conversations", 
+                    "Wizard of Search Engine: Access to Information Through Conversations with Search Engines",
+                    "Semi-Supervised Variational Reasoning for Medical Dialogue Generation",
+                    "One Chatbot Per Person: Creating Personalized Chatbots based on Implicit User Profiles",
+                    "Partner Matters! An Empirical Study on Fusing Personas for Personalized Response Selection in Retrieval-Based Chatbots"
+                ],
+                "authors": [
+                    ["Chuan Meng", "Pengjie Ren", "Zhumin Chen", "Zhaochun Ren", "Tengxiao Xi", "Maarten de Rijke"],
+                    ["Pengjie Ren", "Zhongkun Liu", "Xiaomeng Song", "Hongtao Tian", "Zhumin Chen", "Zhaochun Ren", "Maarten de Rijke"],
+                    ["Dongdong Li", "Zhaochun Ren", "Pengjie Ren", "Zhumin Chen", "Miao Fan", "Jun Ma", "Maarten de Rijke"],
+                    ["Zhengyi Ma", "Zhicheng Dou", "Yutao Zhu", "Hanxun Zhong", "Ji-Rong Wen"],
+                    ["Jia-Chen Gu", "Hui Liu", "Zhen-Hua Ling", "Quan Liu", "Zhigang Chen", "Xiaodan Zhu"]
+                ],
+                "date": ["Tuesday, July 13th", "10AM-11AM EDT"]
+            },
+            {
+                "name": "Session 3B - Recommendation 3",
+                "paper titles": [
+                    "Learning Recommender Systems with Implicit Feedback via Soft Target Enhancement", 
+                    "Set2setRank: Collaborative Set to Set Ranking for Implicit Feedback based Recommendation",
+                    "Package Recommendation with Intra- and Inter-Package Attention Networks",
+                    "A Guided Learning Approach for Item Recommendation via Surrogate Loss Learning",
+                    "Structured Graph Convolutional Networks with Stochastic Masks for Recommender Systems"
+                ],
+                "authors": [
+                    ["Mingyue Cheng", "Fajie Yuan", "Qi Liu", "Shenyang Ge", "Zhi Li", "Runlong Yu", "Defu Lian", "Senchao Yuan", "Enhong Chen"],
+                    ["Lei Chen", "Le Wu", "Kun Zhang", "Richang Hong", "Meng Wang"],
+                    ["Chen Li", "Yuanfu Lu", "Wei Wang", "Chuan Shi", "Ruobing Xie", "Haili Yang", "Cheng Yang", "Xu Zhang", "Leyu Lin"],
+                    ["Ahmed Rashed", "Lars Schmidt-Thieme", "Josif Grabocka"],
+                    ["Huiyuan Chen", "Lan Wang", "Yusan Lin", "Michael Yeh", "Fei Wang", "Hao Yang"]
+                ],
+                "date": ["Tuesday, July 13th", "10AM-11AM EDT"]
+            },
+            {
+                "name": "Session 3C - Neural IR",
+                "paper titles": [
+                    "WGCN: Graph Convolutional Networks with Weighted Structural Features", 
+                    "Privacy Protection in Deep Multi-modal Retrieval",
+                    "Learning Discriminative Neural Representations for Event Detection",
+                    "Not All Relevance Scores are Equal: Efficient Uncertainty and Calibration Modeling for Deep Retrieval Models",
+                    "Interpretable Graph Similarity Computation via Differentiable Optimal Alignment of Node Embeddings"
+                ],
+                "authors": [
+                    ["Yunxiang Zhao", "Jianzhong Qi", "Qingwei Liu", "Rui Zhang"],
+                    ["Peng-Fei Zhang", "Yang Li", "Zi Huang", "Hongzhi Yin"],
+                    ["Jinzhi Liao", "Xiang Zhao", "Xinyi Li", "Lingling Zhang", "Jiuyang Tang"],
+                    ["Daniel Cohen", "Bhaskar Mitra", "Oleg Lesota", "Navid Rekabsaz", "Carsten Eickhoff"],
+                    ["Khoa Doan", "Saurav Manchanda", "Suchismit Mahapatra", "Chandan K Reddy"]
+                ],
+                "date": ["Tuesday, July 13th", "10AM-11AM EDT"]
+            },
+            {
+                "name": "Session 3D - Cross-domain IR",
+                "paper titles": [
+                    "MMConv: an Environment for Multimodal Conversational Search across Multiple Domains", 
+                    "Video Corpus Moment Retrieval with Contrastive Learning",
+                    "One Person, One Model, One World: Learning Continual User Representation without Forgetting",
+                    "Learning Domain Semantics and Cross-Domain Correlations for Paper Recommendation",
+                    "FedCT: Federated Collaborative Transfer for Recommendation"
+                ],
+                "authors": [
+                    ["Lizi Liao", "Long Le Hong", "Zheng Zhang", "Minlie Huang", "Tat Seng Chua"],
+                    ["Hao Zhang", "Aixin Sun", "Wei Jing", "Guoshun Nan", "Liangli Zhen", "Joey Tianyi Zhou", "Rick Siow Mong Goh"],
+                    ["Fajie Yuan", "Guoxiao Zhang", "Alexandros Karatzoglou", "Joemon Jose", "Beibei Kong", "Yudong Li"],
+                    ["Yi Xie", "Yuqing Sun", "Elisa Bertino"],
+                    ["Shuchang Liu", "Shuyuan Xu", "Wenhui Yu", "Zuohui Fu", "Yongfeng Zhang", "Amelie Marian"]
+                ],
+                "date": ["Tuesday, July 13th", "10AM-11AM EDT"]
+            },
+            {
+                "name": "Session 3E - Diversity and novelty",
+                "paper titles": [
+                    "Self-supervised Graph Learning for Recommendation", 
+                    "Modeling Intent Graph for Search Result Diversification",
+                    "Enhancing Domain-Level and User-Level Adaptivity in Diversified Recommendation",
+                    "Graph Meta Network for Multi-Behavior Recommendation",
+                    "Fairness among New Items in Cold Start Recommender Systems"
+                ],
+                "authors": [
+                    ["Jiancan Wu", "Xiang Wang", "Fuli Feng", "Xiangnan He", "Liang Chen", "Jianxun Lian", "Xing Xie"],
+                    ["Zhan Su", "Zhicheng Dou", "Yutao Zhu", "Xubo Qin", "Ji-Rong Wen"],
+                    ["Yile Liang", "Tieyun Qian", "Qing Li", "Hongzhi Yin"],
+                    ["Lianghao Xia", "Chao Huang", "Yong Xu", "Yong Xu", "Liefeng Bo"],
+                    ["Ziwei Zhu", "Jingu Kim", "Trung Nguyen", "Aish Fenton", "James Caverlee"]
+                ],
+                "date": ["Tuesday, July 13th", "10AM-11AM EDT"]
+            },
+            {
+                "name": "Session 3F - Applications 3",
+                "paper titles": [
+                    "Make It Easy: An Effective End-to-End Entity Alignment Framework", 
+                    "(TOIS) When to Stop Reviewing in Technology-Assisted Reviews",
+                    "Files of a Feather Flock Together? Measuring and Modeling How Users Perceive File Similarity in Cloud Storage",
+                    "CINES: Explore Citation Network and Event Sequences for Citation Forecasting",
+                    "(Perspectives) Current Challenges and Future Directions in Podcast Information Access"
+                ],
+                "authors": [
+                    ["Congcong Ge", "Xiaoze Liu", "Lu Chen", "Baihua Zheng", "Yunjun Gao"],
+                    ["Dan Li", "Evangelos Kanoulas"],
+                    ["Will Brackenbury", "Galen Harrison", "Kyle Chard", "Aaron Elmore", "Blase Ur"],
+                    ["Fang He", "Wang-Chien Lee", "Tao-Yang Fu", "Zhen Lei"],
+                    ["Rosie Jones", "Hamed Zamani", "Markus Schedl", "Ching-Wei Chen", "Sravana Reddy", "Ann Clifton", "Jussi Karlgren", "Helia Hashemi", "Aasish Pappu", "Zahra Nazari", "Longqi Yang", "Oguz Semerci", "Hugues Bouchard", "Ben Carterette"]
+                ],
+                "date": ["Tuesday, July 13th", "10AM-11AM EDT"]
+            },
+            {
+                "name": "Session 4A - Conversational IR 2",
+                "paper titles": [
+                    "Learning to Ask Appropriate Questions in Conversational Recommendation", 
+                    "Multimodal Activation: Awakening Dialog Robots withoutWake Words",
+                    "Few-Shot Conversational Dense Retrieval",
+                    "Conversational Fashion Image Retrieval via Multiturn Natural Language Feedback",
+                    "(TOIS) Spoken Conversational Context Improves Query Auto Completion in Web Search",
+                    "(Perspectives) Towards Multi-Modal Conversational Information Seeking"
+                ],
+                "authors": [
+                    ["Xuhui Ren", "Hongzhi Yin", "Tong Chen", "Hao Wang", "Zi Huang", "Kai Zheng"],
+                    ["Liqiang Nie", "Mengzhao Jia", "Xuemeng Song", "Ganglu Wu", "Harry Cheng", "Jian Gu"],
+                    ["Shi Yu", "Zhenghao Liu", "Chenyan Xiong", "Tao Feng", "Zhiyuan Liu"],
+                    ["Yifei Yuan", "Wai Lam"],
+                    ["Tung Vuong", "Salvatore Andolina", "Giulio Jacucci", "Tuukka Ruotsalo"],
+                    ["Yashar Deldjoo", "Johanne Trippas", "Hamed Zamani"]
+                ],
+                "date": ["Tuesday, July 13th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 4B - Recommendation 4",
+                "paper titles": [
+                    "Neural Graph Matching based Collaborative Filtering", 
+                    "The World is Binary: Contrastive Learning for Denoising Next Basket Recommendation",
+                    "Dual Attention Transfer in Session-based Recommendation with Multi Dimensional Integration",
+                    "User-Centric Path Reasoning towards ExplainableRecommendation",
+                    "On Interpretation and Measurement of Soft Attributes for Recommendation"
+                ],
+                "authors": [
+                    ["Yixin Su", "Rui Zhang", "Sarah M. Erfani", "Junhao Gan"],
+                    ["Yuqi Qin", "Pengfei Wang", "Chenliang Li"],
+                    ["Chen Chen", "Jie Guo", "Bin Song"],
+                    ["Chang-You Tai", "Huang Liangying", "Chienkun Huang", "Ku Lun-Wei"],
+                    ["Krisztian Balog", "Filip Radlinski", "Alexandros Karatzoglou"]
+                ],
+                "date": ["Tuesday, July 13th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 4C - Learning to rank",
+                "paper titles": [
+                    "How do Online Learning to Rank Methods Adapt to Changes of Intent?", 
+                    "Scalable Personalised Item Ranking through Parametric Density Estimation",
+                    "New Insights into Metric Optimization for Ranking-based Recommendation",
+                    "Fast Attention-based Learning-To-Rank Model for Structured Map Search",
+                    "Learning to Rank for Mathematical Formula Retrieval"
+                ],
+                "authors": [
+                    ["Shengyao Zhuang", "Guido Zuccon"],
+                    ["Riku Togashi", "Masahiro Kato", "Mayu Otani", "Tetsuya Sakai", "Shin'Ichi Satoh"],
+                    ["Roger Zhe Li", "Julián Urbano", "Alan Hanjalic"],
+                    ["Chiqun Zhang", "Michael Evans", "Max Lepikhin", "Dragomir Yankov"],
+                    ["Behrooz Mansouri", "Richard Zanibbi", "Douglas Oard"]
+                ],
+                "date": ["Tuesday, July 13th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 4D - Legal IR",
+                "paper titles": [
+                    "Investigating User Behavior in Legal Case Retrieval", 
+                    "NeurJudge: A Circumstance-aware Neural Framework for Legal Judgment Prediction",
+                    "Legal Judgment Prediction via Relational Learning",
+                    "Legal Judgment Prediction with Multi-Stage Case Representation Learning in the Real Court Setting",
+                    "Cross-Domain Contract Element Extraction with a Bi-directional Feedback Clause-Element Relation Network"
+                ],
+                "authors": [
+                    ["Yunqiu Shao", "Yueyue Wu", "Yiqun Liu", "Jiaxin Mao", "Min Zhang", "Shaoping Ma"],
+                    ["Linan Yue", "Qi Liu", "Binbin Jin", "Han Wu", "Kai Zhang", "Yanqing An", "Mingyue Cheng", "Biao Yin", "Dayong Wu"],
+                    ["Qian Dong", "Shuzi Niu"],
+                    ["Luyao Ma", "Yating Zhang", "Tianyi Wang", "Xiaozhong Liu", "Wei Ye", "Changlong Sun", "Shikun Zhang"],
+                    ["Zihan Wang", "Hongye Song", "Zhaochun Ren", "Pengjie Ren", "Zhumin Chen", "Xiaozhong Liu", "Hongsong Li", "Maarten de Rijke"]
+                ],
+                "date": ["Tuesday, July 13th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 4E - Fairness",
+                "paper titles": [
+                    "TFROM: A Two-sided Fairness-Aware Recommendation Model for Both Customers and Providers", 
+                    "Computationally Efficient Optimization of Plackett-Luce Ranking Models for Relevance and Fairness",
+                    "When Fair Ranking Meets Uncertain Inference",
+                    "Policy-Gradient Training of Fair and Unbiased Ranking Functions",
+                    "Towards Personalized Fairness based on Causal Notion"
+                ],
+                "authors": [
+                    ["Yao Wu", "Jian Cao", "Guandong Xu", "Yudong Tan"],
+                    ["Harrie Oosterhuis"],
+                    ["Avijit Ghosh", "Ritam Dutt", "Christo Wilson"],
+                    ["Himank Yadav", "Zhengxiao Du", "Thorsten Joachims"],
+                    ["Yunqi Li", "Hanxiong Chen", "Shuyuan Xu", "Yingqiang Ge", "Yongfeng Zhang"]
+                ],
+                "date": ["Tuesday, July 13th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 4F - Adversarial IR",
+                "paper titles": [
+                    "(TOIS) CRSAL: Conversational Recommender Systems with Adversarial Learning", 
+                    "DAIR: A Query-Efficient Decision-based Attack on Image Retrieval Systems",
+                    "Fight Fire with Fire: Towards Robust Recommender Systems via Adversarial Poisoning Training",
+                    "Adversarial-Enhanced Hybrid Graph Network for User Identity Linkage",
+                    "A Study of Defensive Methods to Protect Visual Recommendation Against Adversarial Manipulation of Images",
+                    "(TOIS) Bots in Social and Interaction Networks: Detection and Impact Estimation"
+                ],
+                "authors": [
+                    ["Xuhui Ren", "Hongzhi Yin", "Tong Chen", "Hao Wang", "Quoc Viet Hung Nguyen", "Zi Huang", "Xiangliang Zhang"],
+                    ["Mingyang Chen", "Junda Lu", "Jianbin Qin", "Yi Wang", "Wei Wang"],
+                    ["Chenwang Wu", "Defu Lian", "Yong Ge", "Zhihao Zhu", "Enhong Chen", "Senchao Yuan"],
+                    ["Xiaolin Chen", "Xuemeng Song", "Guozhen Peng", "Shanshan Feng", "Liqiang Nie"],
+                    ["Vito Walter Anelli", "Yashar Deldjoo", "Tommaso Di Noia", "Daniele Malitesta", "Felice Antonio Merra"],
+                    ["Marcelo Mendoza", "Maurizio Tesconi", "Stefano Cresci"]
+                ],
+                "date": ["Tuesday, July 13th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Poster Session 2, Round 1",
+                "paper titles": [
+                    "(TOIS) CRSAL: Conversational Recommender Systems with Adversarial Learning", 
+                    "DAIR: A Query-Efficient Decision-based Attack on Image Retrieval Systems",
+                    "Fight Fire with Fire: Towards Robust Recommender Systems via Adversarial Poisoning Training",
+                    "Adversarial-Enhanced Hybrid Graph Network for User Identity Linkage",
+                    "A Study of Defensive Methods to Protect Visual Recommendation Against Adversarial Manipulation of Images",
+                    "(TOIS) Bots in Social and Interaction Networks: Detection and Impact Estimation"
+                ],
+                "authors": [
+                    ["Xuhui Ren", "Hongzhi Yin", "Tong Chen", "Hao Wang", "Quoc Viet Hung Nguyen", "Zi Huang", "Xiangliang Zhang"],
+                    ["Mingyang Chen", "Junda Lu", "Jianbin Qin", "Yi Wang", "Wei Wang"],
+                    ["Chenwang Wu", "Defu Lian", "Yong Ge", "Zhihao Zhu", "Enhong Chen", "Senchao Yuan"],
+                    ["Xiaolin Chen", "Xuemeng Song", "Guozhen Peng", "Shanshan Feng", "Liqiang Nie"],
+                    ["Vito Walter Anelli", "Yashar Deldjoo", "Tommaso Di Noia", "Daniele Malitesta", "Felice Antonio Merra"],
+                    ["Marcelo Mendoza", "Maurizio Tesconi", "Stefano Cresci"]
+                ],
+                "date": ["Tuesday, July 13th", "12PM-1PM EDT"]
             }
         ],
         
