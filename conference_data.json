@@ -1,0 +1,249 @@
+{
+    "SIGIR": {
+        "date": "2021",
+        "sessions": [
+            {
+                "name": "Session 1A Bias and Counterfactual Learning 1",
+                "paper titles": [
+                    "Deconfounded Video Moment Retrieval with Causal Intervention", 
+                    "Causal Intervention for Leveraging Popularity Bias in Recommendation",
+                    "AutoDebias: Learning to Debias for Recommendation",
+                    "Mitigating Sentiment Bias for Recommender Systems",
+                    "Counterfactual Reward Modification for Streaming Recommendation with Delayed Feedback"
+                ],
+                "authors": [
+                    ["Xun Yang", "Fuli Feng", "Wei Ji", "Meng Wang", "Tat-Seng Chua"],
+                    ["Yang Zhang", "Fuli Feng", "Xiangnan He", "Tianxin Wei", "Chonggang Song", "Guohui Ling", "Yongdong Zhang"],
+                    ["Jiawei Chen", "Hande Dong", "Yang Qiu", "Xiangnan He", "Xin Xin", "Liang Chen", "Guli Lin", "Keping Yang"],
+                    ["Chen Lin", "Xinyi Liu", "Guipeng Xv", "Hui Li"],
+                    ["Xiao Zhang", "Haonan Jia", "Hanjing Su", "Wenhan Wang", "Jun Xu", "Ji-Rong Wen"]
+                ],
+                "date": ["Monday, July 12th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 1B - Recommendation",
+                "paper titles": [
+                    "Joint Knowledge Pruning and Recurrent Graph Convolution for News Recommendation", 
+                    "Personalized News Recommendation with Knowledge-aware Interactive Matching",
+                    "Enhanced Graph Learning for Collaborative Filtering via Mutual Information Maximization",
+                    "(TOIS) Neural Feature-aware Recommendation with Signed Hypergraph Convolutional Network",
+                    "ReXPlug: Explainable Recommendation using Plug-and-Play Language Model",
+                    "(TOIS) Keeping the Data Lake in Form: Proximity Mining for Pre-filtering Schema Matching"
+                ],
+                "authors": [
+                    ["Yu Tian", "Yuhao Yang", "Xudong Ren", "Pengfei Wang", "Fangzhao Wu", "Qian Wang", "Chenliang Li"],
+                    ["Tao Qi", "Fangzhao Wu", "Chuhan Wu", "Yongfeng Huang"],
+                    ["Yonghui Yang", "Le Wu", "Richang Hong", "Kun Zhang", "Meng Wang"],
+                    ["Xu Chen", "Kun Xiong", "Yongfeng Zhang", "Long Xia", "Dawei Yin", "Jimmy (Xiangji) Huang"],
+                    ["Deepesh Hada", "Vijaikumar M", "Shirish Shevade"]
+                ],
+                "date": ["Monday, July 12th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 1C - Searching and Ranking",
+                "paper titles": [
+                    "Group based Personalized Search by Integrating Search Behaviour and Friend Network", 
+                    "An Image is Worth a Thousand Terms? Analysis of Visual E-Commerce Search",
+                    "(TOIS) Faceted Search with Object Ranking and Answer Size Constraints",
+                    "Efficiently Teaching an Effective Dense Retriever with Balanced Topic Aware Sampling",
+                    "Learning a Fine-Grained Review-based Transformer Model for Personalized Product Search",
+                    "(TOIS) FNED: A Deep Network for Fake News Early Detection on Social Media"
+                ],
+                "authors": [
+                    ["Yujia Zhou", "Zhicheng Dou", "Bingzheng Wei", "Ruobing Xie", "Ji-Rong Wen"],
+                    ["Arnon Dagan", "Ido Guy", "Slava Novgorodov"],
+                    ["Konstantinos Manioudakis", "Yannis Tzitzikas"],
+                    ["Sebastian Hofstätter", "Sheng-Chieh Lin", "Jheng-Hong Yang", "Jimmy Lin", "Allan Hanbury"],
+                    ["Keping Bi", "Qingyao Ai", "W. Bruce Croft"],
+                    ["Yang Liu", "Yi-Fang Wu"]
+                ],
+                "date": ["Monday, July 12th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 1D - Social Aspects",
+                "paper titles": [
+                    "DepressionNet: Learning Multi-modalities with User Post Summarization for Depression Detection on Social Media", 
+                    "Look Before You Leap: Confirming Edge Signs in Random Walk with Restart for Personalized Node Ranking in Signed Networks",
+                    "Hierarchical Multi-modal Contextual Attention Network for Fake News Detection",
+                    "(TOIS) Fine-grained Privacy Detection with Graph-regularized Hierarchical Attentive Representation Learning",
+                    "(TOIS) Pretrained Embeddings for Stance Detection with Hierarchical Capsule Network on Social Media",
+                    "DyDiff-VAE: A Dynamic Variational Framework for Information Diffusion Prediction"
+                ],
+                "authors": [
+                    ["Hamad Zogan", "Imran Razzak", "Shoaib Jameel", "Guandong Xu"],
+                    ["Won Chang Lee", "Yeon-Chang Lee", "Dongwon Lee", "Sang-Wook Kim"],
+                    ["Shengsheng Qian", "Jinguang Wang", "Jun Hu", "Quan Fang", "Changsheng Xu"],
+                    ["Xiaolin Chen", "Xuemeng Song", "Ruiyang Ren", "Lei Zhu", "Zhiyong Cheng", "Liqiang Nie"],
+                    ["Guangzhen Zhao", "Peng Yang"],
+                    ["Ruijie Wang", "Zijie Huang", "Shengzhong Liu", "Huajie Shao", "Dongxin Liu", "Jinyang Li", "Tianshi Wang", "Dachun Sun", "Shuochao Yao", "Tarek Abdelzaher"]
+                ],
+                "date": ["Monday, July 12th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 1E - Knowledge Structure",
+                "paper titles": [
+                    "Tracing Knowledge State with Individual Cognition and Acquisition Estimation", 
+                    "Knowledge-based Review Generation by Coherence Enhanced Text Planning",
+                    "UGRec: Modeling Directed and Undirected Relations for Recommendation",
+                    "DEKR: Description Enhanced Knowledge Graph for Machine Learning Method Recommendation",
+                    "Relational Learning with Gated and Attentive Neighbor Aggregator for Few-Shot Knowledge Graph Completion",
+                    "(TOIS) Learning Unsupervised Knowledge-Enhanced Representations to Reduce the Semantic Gap in Information Retrieval"
+                ],
+                "authors": [
+                    ["Ting Long", "Liu Yunfei", "Jian Shen", "Weinan Zhang", "Yong Yu"],
+                    ["Junyi Li", "Wayne Xin Zhao", "Zhicheng Wei", "Nicholas Jing Yuan", "Ji-Rong Wen"],
+                    ["Xinxiao Zhao", "Zhiyong Cheng", "Lei Zhu", "Jiecai Zheng", "Xueqing Li"],
+                    ["Xianshuai Cao", "Yuliang Shi", "Han Yu", "Jihu Wang", "Xinjun Wang", "Zhongmin Yan", "Zhiyong Chen"],
+                    ["Guanglin Niu", "Yang Li", "Chengguang Tang", "Ruiying Geng", "Jian Dai", "Qiao Liu", "Hao Wang", "Jian Sun", "Fei Huang", "Luo Si"],
+                    ["Maristella Agosti", "Stefano Marchesin", "Gianmaria Silvello"]
+                ],
+                "date": ["Monday, July 12th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 1F - Applications 1",
+                "paper titles": [
+                    "AdsGNN: Behavior-Graph Augmented Relevance Modeling in Sponsored Search", 
+                    "Hybrid Learning to Rank for Financial Event Ranking",
+                    "Hybrid Fusion with Intra- and Cross-Modality Attention for Image-Recipe Retrieval",
+                    "PreSizE: Predicting Size in E-Commerce using Transformers",
+                    "Understanding and Mitigating Bias in Online Health Search",
+                    "(TOIS) Exploiting Real-time Search Engine Queries for Earthquake Detection: A Summary of Results"
+                ],
+                "authors": [
+                    ["Xing Xie", "Chaozhuo Li", "Zheng Liu", "Bochen Pang", "Tianqi Yang", "Yuming Liu", "Yanling Cui", "Hao Sun", "Qi Zhang", "Liangjie Zhang"],
+                    ["Fuli Feng", "Moxin Li", "Cheng Luo", "Ritchie Ng", "Tat-Seng Chua"],
+                    ["Jiao Li", "Xing Xu", "Wei Yu", "Fumin Shen", "Zuo Cao", "Kai Zuo", "Heng Tao Shen"],
+                    ["Yotam Eshel", "Or Levi", "Haggai Roitman", "Alex Nus"],
+                    ["Anat Hashavit", "Sarit Kraus", "Tamar Stern", "Raz Lin", "Hongning Wang"],
+                    ["Qi Zhang", "Hengshu Zhu", "Qi Liu", "Enhong Chen", "Hui Xiong"]
+                ],
+                "date": ["Monday, July 12th", "11AM-12PM EDT"]
+            },
+            {
+                "name": "Session 2A - Bias and Counterfactual Learning 2",
+                "paper titles": [
+                    "Enhanced Doubly Robust Learning for Debiasing Post-Click Conversion Rate Estimation", 
+                    "Adapting Interactional Observation Embedding for Counterfactual Learning to Rank",
+                    "This Is Not What We Ordered: Exploring Why Biased Search Result Rankings Affect User Attitudes on Debated Topics",
+                    "Societal Biases in Retrieved Contents: Measurement Framework and Adversarial Mitigation of BERT Rankers",
+                    "(TOIS) Unbiased Learning to Rank: Online or Offline?"
+                ],
+                "authors": [
+                    ["Siyuan Guo", "Lixin Zou", "Yiding Liu", "Wenwen Ye", "Suqi Cheng", "Shuaiqiang Wang", "Hechang Chen", "Dawei Yin", "Yi Chang"],
+                    ["Chenghao Liu", "Mouxiang Chen", "Jianling Sun", "Steven C.H. Hoi"],
+                    ["Tim Draws", "Nava Tintarev", "Ujwal Gadiraju", "Alessandro Bozzon", "Benjamin Timmermans"],
+                    ["Navid Rekabsaz", "Simone Kopeinik", "Markus Schedl"],
+                    ["Qingyao Ai", "Tao Yang", "Huazheng Wang", "Jiaxin Mao"]
+                ],
+                "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            },
+            {
+                "name": "Session 2B - Recommendation 2",
+                "paper titles": [
+                    "(TOIS) A Survey on Heterogeneous One-Class Collaborative Filtering", 
+                    "Bootstrapping User and Item Representations for One-Class Collaborative Filtering",
+                    "Unsupervised Proxy Selection for Session-based Recommender Systems",
+                    "xLightFM: Extremely Memory-Efficient Factorization Machine",
+                    "(TOIS) Modeling Multiple Coexisting Category-level Intentions for Next Item Recommendation",
+                    "(TOIS) Inductive Contextual Relation Learning for Personalization"
+                ],
+                "authors": [
+                    ["Xiancong Chen", "Lin Li", "Weike Pan", "Zhong Ming"],
+                    ["Dongha Lee", "Seongku Kang", "Hyunjun Ju", "Chanyoung Park", "Hwanjo Yu"],
+                    ["Junsu Cho", "Seongku Kang", "Dongmin Hyun", "Hwanjo Yu"],
+                    ["Gangwei Jiang", "Hao Wang", "Jin Chen", "Haoyu Wang", "Defu Lian", "Enhong Chen"],
+                    ["Yanan Xu", "Yanmin Zhu", "Jiadi Yu"],
+                    ["Chuxu Zhang", "Huaxiu Yao", "Lu Yu", "Chao Huang", "Dongjin Song", "Dongjin Chen", "Meng Jiang", "Nitesh Chawla"]
+                ],
+                "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            },
+            {
+                "name": "Session 2C - Sequences and Sessions",
+                "paper titles": [
+                    "Counterfactual Data-Augmented Sequential Recommendation", 
+                    "StackRec: Efficient Training of Very Deep Sequential Recommender Models by Iterative Stacking",
+                    "CauseRec: Counterfactual User Sequence Synthesis for Sequential Recommendation",
+                    "Sequential Recommendation with Graph Neural Networks",
+                    "Category-aware Collaborative Sequential Recommendation"
+                ],
+                "authors": [
+                    ["Zhenlei Wang", "Jingsen Zhang", "Hongteng Xu", "Xu Chen", "Yongfeng Zhang", "Wayne Xin Zhao", "Ji-Rong Wen"],
+                    ["Jiachun Wang", "Fajie Yuan", "Jian Chen", "Qingyao Wu", "Min Yang", "Yang Sun", "Guoxiao Zhang"],
+                    ["Shengyu Zhang", "Dong Yao", "Zhou Zhao", "Tat-Seng Chua", "Fei Wu"],
+                    ["Jianxin Chang", "Chen Gao", "Yu Zheng", "Yiqun Hui", "Yanan Niu", "Yang Song", "Depeng Jin", "Yong Li"],
+                    ["Renqin Cai", "Hongning Wang", "Jibang Wu", "Chong Wang", "Aidan San"]
+                ],
+                "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            },
+            {
+                "name": "2D - Time Matters",
+                "paper titles": [
+                    "Event Occurrence Date Estimation based on Multivariate Time Series Analysis over Temporal Document Collections", 
+                    "(TOIS) Towards Dynamic User Intention: Temporal Evolutionary Effects of Item Relations in Sequential Recommendation",
+                    "Temporal Knowledge Graph Reasoning Based on Evolutional Representation Learning",
+                    "Summarize Dates First: a paradigm shift in timeline summarization",
+                    "TIE: A Framework for Embedding-based Incremental Temporal Knowledge Graph Completion",
+                    "Allowing for The Grounded Use of Temporal Difference Learning in Large Ranking Models via Sub State Updates"
+                ],
+                "authors": [
+                    ["Jiexin Wang", "Adam Jatowt", "Masatoshi Yoshikawa"],
+                    ["Chenyang Wang", "Weizhi Ma", "Min Zhang", "Chong Chen", "Yiqun Liu", "Shaoping Ma"],
+                    ["Zixuan Li", "Xiaolong Jin", "Wei Li", "Saiping Guan", "Jiafeng Guo", "Huawei Shen", "Yuanzhuo Wang", "Xueqi Cheng"],
+                    ["Moreno La Quatra", "Luca Cagliero", "Elena Baralis", "Alberto Messina", "Maurizio Montagnuolo"],
+                    ["Jiapeng Wu", "Yishi Xu", "Yingxue Zhang", "Chen Ma", "Mark Coates", "Jackie Chi Kit Cheung"],
+                    ["Daniel Cohen"]
+                ],
+                "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            },
+            {
+                "name": "2E - Question Answering",
+                "paper titles": [
+                    "(TOIS) Meaningful Answer Generation of E-Commerce Question-Answering", 
+                    "Answer Complex Questions: Path Ranker Is All You Need",
+                    "Reinforcement Learning from Reformulations in Conversational Question Answering over Knowledge Graphs",
+                    "Ranking User-Generated Content via Multi-Relational Graph Convolution",
+                    "Answering Any-hop Open-domain Questions with Iterative Document Reranking",
+                    "Multi-type Textual Reasoning for Product-aware Answer Generation"
+                ],
+                "authors": [
+                    ["Shen Gao", "Xiuying Chen", "Zhaochun Ren", "Dongyan Zhao", "Rui Yan"],
+                    ["Xinyu Zhang", "Ke Zhan", "Enrui Hu", "Chengzhen Fu", "Lan Luo", "Hao Jiang", "Yantao Jia", "Fan Yu", "Zhicheng Dou", "Zhao Cao", "Lei Chen"],
+                    ["Magdalena Kaiser", "Rishiraj Saha Roy", "Gerhard Weikum"],
+                    ["Kanika Narang", "Adit Krishnan", "Junting Wang", "Chaoqi Yang", "Hari Sundaram", "Carolyn Sutter"],
+                    ["Yuyu Zhang", "Ping Nie", "Arun Ramamurthy", "Le Song"],
+                    ["Yue Feng", "Zhaochun Ren", "Weijie Zhao", "Mingming Sun", "Ping Li"]
+                ],
+                "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            },
+            {
+                "name": "2F - Applications 2",
+                "paper titles": [
+                    "(TOIS) VM-NSP: Vertical Negative Sequential Pattern Mining with Loose Negative Element Constraints", 
+                    "(TOIS) DGeye: Probabilistic Risk Perception and Prediction for Urban Dangerous Goods Management",
+                    "RCD: Relation Map Driven Cognitive Diagnosis for Intelligent Education Systems",
+                    "Self-Supervised Contrastive Learning for Code Retrieval and Summarization via Semantic-Preserving Transformations",
+                    "(TOIS) Context-Aware Target Apps Selection and Recommendation for Enhancing Personal Mobile Assistants",
+                    "(TOIS) How the Accuracy and Confidence of Sensitivity Classification Affects Digital Sensitivity Review"
+                ],
+                "authors": [
+                    ["Longbing Cao", "Wei Wang"],
+                    ["Jingyuan Wang", "Xin Lin", "Yuan Zuo", "Junjie Wu"],
+                    ["Weibo Gao", "Qi Liu", "Zhenya Huang", "Yu Yin", "Haoyang Bi", "Mu Chun Wang", "Jianhui Ma", "Shijin Wang", "Yu Su"],
+                    ["Nghi Bui", "Yijun Yu", "Lingxiao Jiang"],
+                    ["Mohammad Aliannejadi", "Hamed Zamani", "Fabio Crestani", "Bruce Croft"],
+                    ["Graham McDonald", "Craig MacDonald", "Iadh Ounis"]
+                ],
+                "date": ["Monday, July 12th", "12PM-1PM EDT"]
+            }
+        ],
+        
+        "workshops": [
+            {
+
+            }
+        ],
+        "papers": [
+
+        ]
+    }
+}
