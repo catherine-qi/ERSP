@@ -32,25 +32,25 @@ class QueryClassification:
 		self.conv_list = [] #ONLY FOR TESTING PURPOSES
 
 		#Question list
-		self.ques_list = ["When is the session or workshop",
-						"What time is the session or workshop",
-						"Who will be participating in the session or workshop",
-						"What authors are in the session or workshop",
-						"Will this author be in the session or workshop",
-						"What session or workshop will this author be in",
-						"What is the session or workshop about",
-						"What is the session or workshop on",
-						"Recommend a session or workshop related to",
-						"Recommend a session or workshop author is in and related to",
-						"What papers does the session or workshop cover,"
-						"What are some accepted papers in the session or workshop",
-						"Recommend a session related to authors works",
-						"What are some sessions related to author's works",
-						"What are some papers about in the session or workshop",
-						"Papers related to",
-						"What are some papers about",
-						"Give me papers made by",
-						"Papers written by"]
+		self.ques_list = ["When is the session or workshop", #0
+						"What time is the session or workshop", #1
+						"Who will be participating in the session or workshop", #2
+						"What authors are in the session or workshop", #3
+						"Will this author be in the session or workshop", #4
+						"What session or workshop will this author be in", #5
+						"What is the session or workshop about", #6
+						"What is the session or workshop on", #7
+						"Recommend a session or workshop related to", #8
+						"Recommend a session or workshop author is in and related to", #9
+						"What papers does the session or workshop cover," #10
+						"What are some accepted papers in the session or workshop", #11
+						"Recommend a session related to authors works", #12
+						"What are some sessions related to author's works", #13
+						"What are some papers about in the session or workshop", #14
+						"Papers related to", #15
+						"What are some papers about", #16
+						"Give me papers made by", #17
+						"Papers written by"] #18
 
 		#Rejection and acceptance keywords
 		self.other_intents = {
@@ -185,7 +185,7 @@ class QueryClassification:
 		for conference in self.conference_list:
 			if self.find_word(conv_list[0], conference) is not None:
 				return conference
-		return ''
+		return None
 	
 	def entity_keywords(self, conv_list):
 		"""
@@ -202,7 +202,7 @@ class QueryClassification:
 			for word in entity:
 				if self.find_word(conv_list[0], word) is not None:
 					return word
-		return ''
+		return None
 	
 	def get_authors(self, conv_list):
 		"""
