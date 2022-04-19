@@ -40,8 +40,8 @@ if(os.path.exists(directory_path)):
         queries = []
         queries.append(query)
         result = dense_retriever.search(queries)
-        index_num = result[0][1]
-        print(index_num)
+        index_num = result[0][0][1]-1
+        index_num = int(index_num)
         result_author = col.find_one({"index": index_num})
         print(result_author['title'])
 
