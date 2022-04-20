@@ -8,7 +8,6 @@ from sentence_transformers import SentenceTransformer
 from flair.data import Sentence
 from flair.models import SequenceTagger
 from ..interaction_handler.msg import Message
-from ..interaction_handler.da import DialogueAct
 from ..retriever.dense_retriever import DenseRetriever
 from flask import request, Flask, jsonify
 from flask_cors import CORS
@@ -29,7 +28,7 @@ class QueryClassification:
 		self.app = Flask(__name__)
 		CORS(self.app)
 
-		self.conv_list = [] #ONLY FOR TESTING PURPOSES
+		self.conv_list = ['what session will Catherine Qi be speaking in SIGIR 21?'] #ONLY FOR TESTING PURPOSES
 
 		#Question list
 		self.ques_list = ["When is the session or workshop", #0
@@ -59,10 +58,11 @@ class QueryClassification:
 		}
 
 		#Entites refers to what medium the user requests for (paper, session, workshop)
-		self.entities = [['paper',  'article'], ['session'], ['workshop'], ['session and workshop', 'workshop and session']]
+		self.entities = [['paper',  'article'], ['session'], ['workshop'], ['tutorial']]
 
 		#List of all main conferences the chatbot can support
 		self.conference_list = ['SIGIR']
+		self.conference_years = {'2021': ['2021', '21']}
 
 		self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
 		self.tagger = SequenceTagger.load("flair/ner-english-large")
@@ -75,8 +75,6 @@ class QueryClassification:
 			print("false") #testing purposes
 			self.dense_index.create_index_from_documents(self.ques_list)
 			self.dense_index.save_index(index_path='{}/index.pkl'.format(params['pickle_path']), vectors_path='{}/vectors.pkl'.format(params['pickle_path']))
-		
-		self.query_vector = None
 	
 	#Testing purposes
 	def serve(self, port=80):
@@ -88,35 +86,22 @@ class QueryClassification:
 		@self.app.route('/encode', methods=['POST', 'GET'])
 		def encode_endpoint():
 			text = str(request.args.get('text'))
-			self.conv_list.insert(0, str(text))
+			self.conv_list.insert(0, text)
 			da = self.create_DA(self.conv_list)
 			bestq = ''
-			if da.intent == 'rejection':
-				bestq = self.other_intents['reject'][da.intent_index]
-			elif da.intent == 'acceptance':
-				bestq = self.other_intents['acceptance'][da.intent_index]
+			if da['intent'] == 'rejection':
+				bestq = self.other_intents['reject'][0]
+			elif da['intent'] == 'acceptance':
+				bestq = self.other_intents['acceptance'][0]
 			else:
-				bestq = self.ques_list[da.intent_index]
-			temp = "intent: " + da.intent + ", best question: " + bestq
+				bestq = self.ques_list[da['index']]
+			temp = "intent: " + da['intent'] + ", best question: " + bestq
 			results = json.dumps(temp, indent=4)
 			return results
 	
 	#Tetsing purposes only
 	def add_message(self, msg):
 		self.conv_list.insert(0, msg)
-	
-	def vectorize(self, conv_list, batch_size=1):
-		"""
-		Vectorizes the most recent user query.
-
-		Args:
-			conv_list(list): List of interaction_handler.msg.Message, each corresponding to a conversational message from / to the
-            user. This list is in reverse order, meaning that the first elements is the last interaction made by user.
-		
-		Returns:
-			A vector produced from the class' SentenceTransformers model on the user query.
-		"""
-		self.query_vector = self.model.encode(conv_list[0], batch_size)
 	
 	def find_word(self, q, pattern):
 		"""
@@ -149,7 +134,7 @@ class QueryClassification:
 		return None
 	
 	
-	def chack_main_intent(self, conv_list, batch_size=1):
+	def chack_main_intent(self, conv_list):
 		"""
 		Checks user intent.
 
@@ -163,13 +148,13 @@ class QueryClassification:
 		"""
 		if len(conv_list) > 0:
 			if self.check_other_intents(conv_list, 'reject') is not None:
-				return {'intent': 'reject', 'intent_index': -1}
+				return {'intent': 'reject', 'intent index': -1}
 			if self.check_other_intents(conv_list, 'acceptance') is not None:
-				return {'intent': 'acceptance', 'intent_index': -1}
+				return {'intent': 'acceptance', 'intent index': -1}
 		
 		dense_results = self.dense_index.search([conv_list[0]])[0]
 		dense_results = [i[0] for i in dense_results]
-		return {'intent': 'question', 'intent_index': dense_results[0]}
+		return {'intent': 'question', 'intent index': dense_results[0]}
 
 	def main_conference(self, conv_list):
 		"""
@@ -182,10 +167,18 @@ class QueryClassification:
 		Returns:
 			A str of the mentioned conference, else '' if user did not mention a conference.
 		"""
+		result = {'conference': None,
+				  'year': None}
 		for conference in self.conference_list:
 			if self.find_word(conv_list[0], conference) is not None:
-				return conference
-		return None
+				result['conference'] = conference
+		if result['conference'] is not None:
+			for year, lst in self.conference_years.items():
+				for word in lst:
+					if self.find_word(conv_list[0], word) is not None:
+						result['year'] = year
+						return result
+		return result
 	
 	def entity_keywords(self, conv_list):
 		"""
@@ -198,11 +191,13 @@ class QueryClassification:
 		Returns:
 			A str of the mentioned entity, else '' if user did not mention an entity.
 		"""
+		result = []
 		for entity in self.entities:
 			for word in entity:
 				if self.find_word(conv_list[0], word) is not None:
-					return word
-		return None
+					result.append(word)
+					break
+		return result
 	
 	def get_authors(self, conv_list):
 		"""
@@ -234,20 +229,25 @@ class QueryClassification:
 		Returns:
 			A DialogueAct.
 		"""
-		self.vectorize(conv_list)
 		intent_dict = self.chack_main_intent(conv_list)
 		conference = self.main_conference(self.conv_list)
 		entity = self.entity_keywords(self.conv_list)
 		authors = self.get_authors(self.conv_list)
-		return DialogueAct(intent_dict['intent'], intent_dict['intent_index'], self.query_vector, conference, entity, authors)
+		return {'intent': intent_dict['intent'],
+				'index': intent_dict['intent index'],
+				'main conference': conference,
+				'entity': entity,
+				'authors': authors}
 	
 if __name__ == "__main__": #TESTING PURPOSES
 	#conv_list = ["Is Catherine Qi going to be at SIGIR?"]
 	params = {'pickle_path': 'D:/ERSP/chatbot/input_handler'}
 	q = QueryClassification(params)
-	#da = q.create_DA()
-	#print(da.intent)
-	#print(da.main_conference)
-	#print(da.entity)
-	#print(da.authors)
-	q.serve(9000)
+	#da = q.create_DA(q.conv_list)
+	#print(da['intent'])
+	#print(da['main conference']['conference'])
+	#print(da['main conference']['year'])
+	#print(da['entity'])
+	#for a in da['authors']:
+	#	print(a)
+	#q.serve(9000)
