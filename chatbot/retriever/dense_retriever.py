@@ -28,12 +28,9 @@ class DenseRetriever:
 
         logging.info('Built index')
 
-    def search(self, queries, vectorize_needed=True, limit=1000, probes=512, min_similarity=0):
-        if vectorize_needed:
-            query_vectors = self.model.encode(queries, batch_size=self.batch_size)
-        else:
-            query_vectors = queries
-        ids, similarities = self.vector_index.search(query_vectors, k=limit, probes=probes)
+    def search(self, queries, limit=1000, probes=512, min_similarity=0):
+        vectors = self.model.encode(queries, batch_size=self.batch_size)
+        ids, similarities = self.vector_index.search(vectors, k=limit, probes=probes)
         results = []
         for j in range(len(ids)):
             results.append([
