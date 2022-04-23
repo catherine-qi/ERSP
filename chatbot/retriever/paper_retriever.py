@@ -4,14 +4,17 @@ import regex as re
 import numpy as np
 import pickle
 import os
+import requests
 
-from sentence_transformers import SentenceTransformer
+#from sentence_transformers import SentenceTransformer
 from ..retriever.dense_retriever import DenseRetriever
 from pymongo import MongoClient
 
 class PaperRetrieval():
     def __init__(self, params):
         self.params = params
+
+        self.api_url = 'https://api.semanticscholar.org/graph/v1'
 
         #self.connection_string = self.params['connection string']
         self.client = MongoClient('mongodb://localhost:27017')
@@ -24,78 +27,49 @@ class PaperRetrieval():
 
         self.arxiv_path = self.params['arxiv path']
 
-        self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
+        #self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
 
-        self.dense_index = DenseRetriever(self.model)
-        if os.path.exists('{}/arxiv_index.pkl'.format(params['index path'])):
-            print('true') #testing purposes
-            self.dense_index.load_index('{}/arxiv_index.pkl'.format(params['index path']))
-        else:
-            print('false') #testing purpoes
-            self.index_docs()
+        #self.dense_index = DenseRetriever(self.model)
+        #if os.path.exists('{}/arxiv_index.pkl'.format(self.params['index path'])):
+        #    print('true') #testing purposes
+        #    self.dense_index.load_index('{}/arxiv_index.pkl'.format(self.params['index path']))
+        #else:
+        #    print('false') #testing purpoes
+        #    self.index_docs()
         
-    def get_metadata(self):
-        with open(self.arxiv_path, 'r') as f:
+    def get_metadata(self, path):
+        with open(path, 'r') as f:
             for line in f:
                 yield line
         f.close()
     
     def index_docs(self):
         titles = []
-        abstracts = []
-        authors = []
-        
-        metadata = self.get_metadata()
-        count = 0
+        #abstracts = []
+        #authors = []
+        title_abstract = []
+        metadata = self.get_metadata(self.arxiv_path)
         for paper in metadata:
-            if count == 10000:
-                break
             paper_dict = json.loads(paper)
 
             cat = paper_dict['categories'].split('.')[0]
             if cat == 'cs' or cat == 'stat': #or cat == 'math' for more papers
+                if paper_dict['title'] in titles:
+                    continue
                 titles.append(paper_dict['title'])
-                abstracts.append(paper_dict['abstract'])
-                authors.append(paper_dict['authors'])
-            count += 1
-        
-        df_indexed = pd.DataFrame({  # convert the json to a pandas dataframe
-            'title': titles,
-            'abstract': abstracts,
-            'authors': authors
-        })
-
-        df_mongo = pd.DataFrame({  # convert the json to a pandas dataframe
-        'authors': authors,
-        'title': titles,
-        'abstract': abstracts
-        })
-
-        for row_label in df_indexed.index:  # convert the multiple authors separated by ', and' to a list
-            df_indexed['authors'][row_label] = re.split(
-                ', | and ', df_indexed['authors'][row_label])
-        
-        for row_label in df_mongo.index:  # convert the multiple authors separated by ', and' to a list
-            df_mongo['authors'][row_label] = re.split(
-                ', | and ', df_mongo['authors'][row_label])
-        
-        parsed_col = 'authors'
-        df_mongo = pd.DataFrame({  # convert it to a new dataframe such that each author gets their own entry with the other columns preserved
-            col: np.repeat(df_mongo[col].values, df_mongo[parsed_col].str.len())
-            for col in df_mongo.columns.difference([parsed_col])
-        }).assign(**{parsed_col: np.concatenate(df_mongo[parsed_col].values)})[df_mongo.columns.tolist()]
-
-        # concat the metadata into one column. Final dataframe is authors, title, abstracts(concatenated metadata)
-        df_indexed['abstract'] = df_indexed['title'] + df_indexed['abstract']
-        documents = df_indexed["abstract"].values.tolist()
-
-        self.dense_index.create_index_from_documents(documents)
+                #abstracts.append(paper_dict['abstract'])
+                #authors.append(paper_dict['authors'])
+                title_abstract.append(paper_dict['title'] + ' ' + paper_dict['abstract'])
+        #df_indexed = pd.DataFrame({  # convert the json to a pandas dataframe
+        #    'title': titles,
+        #    'abstract': abstracts,
+        #    'authors': authors
+        #})
+        df_json = df_indexed.to_json('arxiv_parsed.json', orient = 'index')
+        print('here')
+        self.dense_index.create_index_from_documents(title_abstract)
+        print('here')
         self.dense_index.save_index(index_path='{}/arxiv_index.pkl'.format(self.params['index path']), vectors_path='{}/arxiv_vectors.pkl'.format(self.params['index path']))
-
-        df_mongo.reset_index(inplace=True)  # Reset Index
-        data_dict = df_mongo.to_dict("records")  # Convert to dictionary
-
-        self.col.insert_many(data_dict)
 
     def result_search(self, author):
         author_dict = self.col.find_one({"authors": author})
@@ -110,20 +84,80 @@ class PaperRetrieval():
     
     #returns best papers related to query in arXiv dataset
     def paper_search(self, conv_list):
-        pass
+        results = self.dense_index.search([conv_list[0]])[0]
+        results = [i[1] for i in results][0]
+        title = col.find_one({'index': results})
+        return title
 
-    #returns list of titles made by user
-    def user_profile(self):
-        pass
+    def get_paper_id(self, author, title):
+        data = None
+        url = '{}/{}/{}'.format(self.api_url, 'author', 'search?query=')
+        author = author.replace(' ', '+')
+        url += '{}/{}'.format(author, '&fields=name,papers.title')
+        result = requests.get(url, timeout=2)
+        print(result)
+        if result.status_code == 200:
+            data = result.json()
+            if len(data) == 1 and 'error' in data:
+                data = {}
+        elif result.status_code == 403:
+            return 'HTTP status 403 Forbidden'
+        elif result.status_code == 429:
+            return 'HTTP status 429 Too Many Requests'
+        for entry in data['data']:
+            for paper in entry['papers']:
+                if paper['title'] == title:
+                    return paper['paperId']
+        return None
+    
+    def get_author_id(self, author, paper_id):
+        data = None
+        url = '{}/{}/{}'.format(self.api_url, 'paper', paper_id)
+        url += '?fields=authors'
+        result = requests.get(url, timeout=2)
+        if result.status_code == 200:
+            data = result.json()
+            if len(data) == 1 and 'error' in data:
+                data = {}
+        elif result.status_code == 403:
+            return 'HTTP status 403 Forbidden'
+        elif result.status_code == 429:
+            return 'HTTP status 429 Too Many Requests'
+        for entry in data['authors']:
+            if entry['name'] == author:
+                print(entry['authorId'])
+                return entry['authorId']
+
+    def user_profile(self, author, title):
+        data = None
+        author_works = []
+        paper_id = self.get_paper_id(author, title)
+        auth_id = self.get_author_id(author, paper_id)
+
+        url = '{}/{}/{}'.format(self.api_url, 'author', auth_id)
+        url += '?fields=papers'
+        result = requests.get(url, timeout=2)
+        if result.status_code == 200:
+            data = result.json()
+            if len(data) == 1 and 'error' in data:
+                data = {}
+        elif result.status_code == 403:
+            return 'HTTP status 403 Forbidden'
+        elif result.status_code == 429:
+            return 'HTTP status 429 Too Many Requests'
+        for entry in data['papers']:
+            author_works.append(entry['title'])
+        return author_works
 
 if __name__ == "__main__":
     p = PaperRetrieval({'arxiv path': 'D:\\ERSP\\arxiv\\arxiv-metadata-oai-snapshot.json',
+                        'directory': 'C:/Users/snipe/Documents/GitHub//ERSP/arxiv_parsed.json',
                              'index path': 'D:/ERSP/chatbot/input_handler',
                              'DA list': [{'intent': 'question',
 				                        'index': 0,
 				'main conference': {'conference': 'SIGIR', 'year': '2021'},
 				'entity': ['session'],
 				'authors': ['Hamed Zamani']}]})
-    print(p.result_search('Lester Ingber'))
+    print(p.user_profile('Hamed Zamani', 'Conversational Search and Recommendation: Introduction to the Special Issue'))
 
 
