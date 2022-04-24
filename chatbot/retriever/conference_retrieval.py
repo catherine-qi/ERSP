@@ -3,6 +3,7 @@ import json
 from sentence_transformers import SentenceTransformer
 from ..retriever.dense_retriever import DenseRetriever
 from ..retriever.sparse_retriever import SparseRetriever
+from ..retriever.paper_retriever import PaperRetrieval
 from flask import request, Flask, jsonify
 from flask_cors import CORS
 
@@ -147,9 +148,6 @@ class ConferenceRetrieval():
         
         return result
     
-    def description(self, conv_list):
-        pass
-    
     def best_entity(self, conv_list, authors_wanted=False):
         curr_da = self.params['DA list'][0]
         wanted_conf = curr_da['main conference']['conference'] + curr_da['main conference']['year']
@@ -220,18 +218,26 @@ class ConferenceRetrieval():
         dense_results = [i[0] for i in dense_results][0]
         return titles[dense_results]
 
-    def related_author_session(self, da):
-        pass
+    def related_author_session(self, conv_list, paper_retrieval):
+        curr_da = self.params['DA list'][0]
+        authors = curr_da['authors']
 
-    def entity_paper(self, da, name):
-        pass
+        title_flag = True
+        if title_flag:
+            author_data = paper_retrieval.user_profile(authors[0], conv_list[0])
+            author_data = " ".join(author_data)
+            recommendation = self.best_entity([author_data])
+            return recommendation
     
 if __name__ == "__main__":
-    c = ConferenceRetrieval({'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json',
+    params = {'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json',
                              'index path': 'D:/ERSP/chatbot/input_handler',
+                             'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json',
                              'DA list': [{'intent': 'question',
 				                        'index': 0,
 				'main conference': {'conference': 'SIGIR', 'year': '2021'},
 				'entity': ['session'],
-				'authors': ['Hamed Zamani']}]})
-    print(c.best_paper_title(['Papers in session on Session 6E - Evaluation about diversity measures']))
+				'authors': ['Hamed Zamani']}]}
+    c = ConferenceRetrieval(params)
+    p = PaperRetrieval(params)
+    print(c.related_author_session(['Conversational Information Seeking'], p))
