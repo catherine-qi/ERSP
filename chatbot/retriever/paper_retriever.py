@@ -6,7 +6,7 @@ import pickle
 import os
 import requests
 
-#from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer
 from ..retriever.dense_retriever import DenseRetriever
 from pymongo import MongoClient
 
@@ -27,66 +27,34 @@ class PaperRetrieval():
 
         self.arxiv_path = self.params['arxiv path']
 
-        #self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
-
-        #self.dense_index = DenseRetriever(self.model)
-        #if os.path.exists('{}/arxiv_index.pkl'.format(self.params['index path'])):
-        #    print('true') #testing purposes
-        #    self.dense_index.load_index('{}/arxiv_index.pkl'.format(self.params['index path']))
-        #else:
-        #    print('false') #testing purpoes
-        #    self.index_docs()
-        
-    def get_metadata(self, path):
-        with open(path, 'r') as f:
-            for line in f:
-                yield line
-        f.close()
-    
+        self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
+    """
+        self.dense_index = DenseRetriever(self.model)
+        if os.path.exists('{}/arxiv_index.pkl'.format(self.params['index path'])):
+            print('true') #testing purposes
+            self.dense_index.load_index('{}/arxiv_index.pkl'.format(self.params['index path']))
+        else:
+            print('false') #testing purpoes
+            self.index_docs()
+    """
     def index_docs(self):
-        titles = []
-        #abstracts = []
-        #authors = []
         title_abstract = []
-        metadata = self.get_metadata(self.arxiv_path)
-        for paper in metadata:
-            paper_dict = json.loads(paper)
-
-            cat = paper_dict['categories'].split('.')[0]
-            if cat == 'cs' or cat == 'stat': #or cat == 'math' for more papers
-                if paper_dict['title'] in titles:
-                    continue
-                titles.append(paper_dict['title'])
-                #abstracts.append(paper_dict['abstract'])
-                #authors.append(paper_dict['authors'])
-                title_abstract.append(paper_dict['title'] + ' ' + paper_dict['abstract'])
-        #df_indexed = pd.DataFrame({  # convert the json to a pandas dataframe
-        #    'title': titles,
-        #    'abstract': abstracts,
-        #    'authors': authors
-        #})
-        df_json = df_indexed.to_json('arxiv_parsed.json', orient = 'index')
+        f = open(self.arxiv_path)
+        data = json.load(f)
+        print('here')
+        for key in data.keys():
+            title_abstract.append(data[key]['title'] + ' ' + data[key]['abstract'])
         print('here')
         self.dense_index.create_index_from_documents(title_abstract)
         print('here')
         self.dense_index.save_index(index_path='{}/arxiv_index.pkl'.format(self.params['index path']), vectors_path='{}/arxiv_vectors.pkl'.format(self.params['index path']))
-
-    def result_search(self, author):
-        author_dict = self.col.find_one({"authors": author})
-        query = author_dict['title'] + author_dict['abstract']
-        queries = []
-        queries.append(query)
-        result = self.dense_index.search(queries)
-        index_num = result[0][0][1]-1
-        index_num = int(index_num)
-        result_author = self.col.find_one({"index": index_num})
-        return result_author['title']
+        f.close()
     
-    #returns best papers related to query in arXiv dataset
+    #returns best papers related to query in arXiv dataset, LOTS OF CODE DUPLICATION!!
     def paper_search(self, conv_list):
         results = self.dense_index.search([conv_list[0]])[0]
         results = [i[1] for i in results][0]
-        title = col.find_one({'index': results})
+        title = self.col.find_one({'index': results})
         return title
 
     def get_paper_id(self, author, title):
@@ -135,7 +103,7 @@ class PaperRetrieval():
         auth_id = self.get_author_id(author, paper_id)
 
         url = '{}/{}/{}'.format(self.api_url, 'author', auth_id)
-        url += '?fields=papers'
+        url += '?fields=papers.title,papers.fieldsOfStudy,papers.abstract'
         result = requests.get(url, timeout=2)
         if result.status_code == 200:
             data = result.json()
@@ -146,18 +114,23 @@ class PaperRetrieval():
         elif result.status_code == 429:
             return 'HTTP status 429 Too Many Requests'
         for entry in data['papers']:
-            author_works.append(entry['title'])
+            if entry['fieldsOfStudy'] is not None and 'Computer Science' in entry['fieldsOfStudy']:
+                big_str = ''
+                if entry['title'] is not None:
+                    big_str = entry['title']
+                    if entry['abstract'] is not None:
+                        big_str = big_str + ' ' + entry['abstract']
+                    author_works.append(big_str)
         return author_works
 
 if __name__ == "__main__":
-    p = PaperRetrieval({'arxiv path': 'D:\\ERSP\\arxiv\\arxiv-metadata-oai-snapshot.json',
-                        'directory': 'C:/Users/snipe/Documents/GitHub//ERSP/arxiv_parsed.json',
-                             'index path': 'D:/ERSP/chatbot/input_handler',
+    p = PaperRetrieval({'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json', #change this to location of arxiv_parsed.json
+                             'index path': 'D:/ERSP/chatbot/input_handler', #change this to where you want to store pickle file
                              'DA list': [{'intent': 'question',
 				                        'index': 0,
 				'main conference': {'conference': 'SIGIR', 'year': '2021'},
 				'entity': ['session'],
 				'authors': ['Hamed Zamani']}]})
-    print(p.user_profile('Hamed Zamani', 'Conversational Search and Recommendation: Introduction to the Special Issue'))
+    print(p.user_profile('Hamed Zamani', 'Conversational Information Seeking'))
 
 
