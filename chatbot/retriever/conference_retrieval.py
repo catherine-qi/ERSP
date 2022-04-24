@@ -229,6 +229,22 @@ class ConferenceRetrieval():
             recommendation = self.best_entity([author_data])
             return recommendation
     
+    def get_results(self, conv_list, index):
+        if index in range(0,2):
+            return self.author_list(conv_list)
+        if index == 2:
+            return self.author_check(conv_list)
+        if index == 3:
+            return self.where_author()
+        if index in range (4,6):
+            return self.best_entity(conv_list) if len(self.params['DA list'][0]['authors']) > 0 else self.best_entity(conv_list, True)
+        if index == 6:
+            return self.get_papers(conv_list)
+        if index in range(7,9):
+            return self.related_author_session(conv_list, self.params['actions']['retrieval'])
+        if index in range(9,11):
+            return self.best_paper_title(conv_list)
+    
 if __name__ == "__main__":
     params = {'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json',
                              'index path': 'D:/ERSP/chatbot/input_handler',
