@@ -28,7 +28,8 @@ class RetrievalAction(Action):
         Returns:
             
         """
-        return params['actions']['retrieval'].get_results(conv_list)
+        index = params['DA list'][0]['index']
+        return params['actions']['retrieval'].get_results(conv_list, index)
 
 class ConferenceAction(Action):
     @staticmethod
@@ -43,7 +44,8 @@ class ConferenceAction(Action):
         Returns:
 
         """
-        return params['actions']['conference'].get_results(conv_list)
+        index = params['DA list'][0]['index']
+        return params['actions']['conference'].get_results(conv_list, index)
 
 class QuestionAction(Action):
     @staticmethod
