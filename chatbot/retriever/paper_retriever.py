@@ -122,6 +122,12 @@ class PaperRetrieval():
                         big_str = big_str + ' ' + entry['abstract']
                     author_works.append(big_str)
         return author_works
+    
+    def get_results(self, conv_list, index):
+        if index in range(11,13):
+            return self.paper_search(conv_list)
+        if index in range(13,15):
+            return self.user_profile(self.params['DA list'][0]['authors'][0], conv_list)
 
 if __name__ == "__main__":
     p = PaperRetrieval({'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json', #change this to location of arxiv_parsed.json
