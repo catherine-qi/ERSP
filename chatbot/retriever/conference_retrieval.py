@@ -110,7 +110,6 @@ class ConferenceRetrieval():
 
         author_list = self.author_list(conv_list)
         
-        counter = 0
         is_in = True
         missing_authors = []
         for a in authors:
@@ -168,8 +167,7 @@ class ConferenceRetrieval():
             else:
                 names = self.get_attr(wanted_conf, entity, 'name')
             for n in names:
-                final_score = 0
-                titles = None
+                titles = []
                 if entity == 'session':
                     titles = self.search(wanted_conf, entity, n)['paper titles']
                 else:
@@ -177,13 +175,11 @@ class ConferenceRetrieval():
                 titles.append(n)
                 large_str = ''
                 for t in titles:
-                    large_str = t + ' '
+                    large_str = large_str + ' ' + t
                 self.dense_index.create_index_from_documents([large_str])
                 dense_results = self.dense_index.search([conv_list[0]])[0]
-                dense_results = [i[1] for i in dense_results]
-                for score in dense_results:
-                    final_score += score
-                similarities.append(final_score)
+                dense_results = [i[1] for i in dense_results][0]
+                similarities.append(dense_results)
             recommendations[entity] = names[similarities.index(max(similarities))]
         
         return recommendations
@@ -205,7 +201,6 @@ class ConferenceRetrieval():
     
     def best_paper_title(self, conv_list):
         curr_da = self.params['DA list'][0]
-        wanted_conf = curr_da['main conference']['conference'] + curr_da['main conference']['year']
         entities = curr_da['entity']
 
         if len(entities) > 1 or entities[0] != 'session':
@@ -237,7 +232,7 @@ class ConferenceRetrieval():
         if index == 3:
             return self.where_author()
         if index in range (4,6):
-            return self.best_entity(conv_list) if len(self.params['DA list'][0]['authors']) > 0 else self.best_entity(conv_list, True)
+            return self.best_entity(conv_list) if len(self.params['DA list'][0]['authors']) < 1 else self.best_entity(conv_list, True)
         if index == 6:
             return self.get_papers(conv_list)
         if index in range(7,9):
