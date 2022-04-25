@@ -1,4 +1,3 @@
-import pandas as pd
 import json
 import regex as re
 import numpy as np
@@ -27,16 +26,16 @@ class PaperRetrieval():
 
         self.arxiv_path = self.params['arxiv path']
 
-        self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
-    """
-        self.dense_index = DenseRetriever(self.model)
-        if os.path.exists('{}/arxiv_index.pkl'.format(self.params['index path'])):
-            print('true') #testing purposes
-            self.dense_index.load_index('{}/arxiv_index.pkl'.format(self.params['index path']))
-        else:
-            print('false') #testing purpoes
-            self.index_docs()
-    """
+        #self.model = SentenceTransformer('multi-qa-mpnet-base-dot-v1', device='cuda')
+
+        #self.dense_index = DenseRetriever(self.model)
+        #if os.path.exists('{}/arxiv_index.pkl'.format(self.params['index path'])):
+        #    print('true') #testing purposes
+        #    self.dense_index.load_index('{}/arxiv_index.pkl'.format(self.params['index path']))
+        #else:
+        #    print('false') #testing purpoes
+        #    self.index_docs()
+
     def index_docs(self):
         title_abstract = []
         f = open(self.arxiv_path)
@@ -62,7 +61,7 @@ class PaperRetrieval():
         url = '{}/{}/{}'.format(self.api_url, 'author', 'search?query=')
         author = author.replace(' ', '+')
         url += '{}/{}'.format(author, '&fields=name,papers.title')
-        result = requests.get(url, timeout=2)
+        result = requests.get(url, timeout=10)
         print(result)
         if result.status_code == 200:
             data = result.json()
@@ -82,7 +81,7 @@ class PaperRetrieval():
         data = None
         url = '{}/{}/{}'.format(self.api_url, 'paper', paper_id)
         url += '?fields=authors'
-        result = requests.get(url, timeout=2)
+        result = requests.get(url, timeout=10)
         if result.status_code == 200:
             data = result.json()
             if len(data) == 1 and 'error' in data:
@@ -104,7 +103,7 @@ class PaperRetrieval():
 
         url = '{}/{}/{}'.format(self.api_url, 'author', auth_id)
         url += '?fields=papers.title,papers.fieldsOfStudy,papers.abstract'
-        result = requests.get(url, timeout=2)
+        result = requests.get(url, timeout=10)
         if result.status_code == 200:
             data = result.json()
             if len(data) == 1 and 'error' in data:
@@ -127,7 +126,7 @@ class PaperRetrieval():
         if index in range(11,13):
             return self.paper_search(conv_list)
         if index in range(13,15):
-            return self.user_profile(self.params['DA list'][0]['authors'][0], conv_list)
+            return self.user_profile(self.params['DA list'][0]['authors'][0], conv_list[0])
 
 if __name__ == "__main__":
     p = PaperRetrieval({'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json', #change this to location of arxiv_parsed.json
@@ -137,6 +136,6 @@ if __name__ == "__main__":
 				'main conference': {'conference': 'SIGIR', 'year': '2021'},
 				'entity': ['session'],
 				'authors': ['Hamed Zamani']}]})
-    print(p.user_profile('Hamed Zamani', 'Conversational Information Seeking'))
+    #print(p.user_profile('Hamed Zamani', 'Conversational Information Seeking'))
 
 
