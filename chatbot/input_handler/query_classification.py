@@ -28,28 +28,22 @@ class QueryClassification:
 		self.app = Flask(__name__)
 		CORS(self.app)
 
-		self.conv_list = ['what session will Catherine Qi be speaking in SIGIR 21?'] #ONLY FOR TESTING PURPOSES
-
 		#Question list
-		self.ques_list = ["When is the session or workshop", #0
-						"What time is the session or workshop", #1
-						"Who will be participating in the session or workshop", #2
-						"What authors are in the session or workshop", #3
-						"Will this author be in the session or workshop", #4
-						"What session or workshop will this author be in", #5
-						"What is the session or workshop about", #6
-						"What is the session or workshop on", #7
-						"Recommend a session or workshop related to", #8
-						"Recommend a session or workshop author is in and related to", #9
-						"What papers does the session or workshop cover," #10
-						"What are some accepted papers in the session or workshop", #11
-						"Recommend a session related to authors works", #12
-						"What are some sessions related to author's works", #13
-						"What are some papers about in the session or workshop", #14
-						"Papers related to", #15
-						"What are some papers about", #16
-						"Give me papers made by", #17
-						"Papers written by"] #18
+		self.ques_list = ["Who will be participating in the session or workshop", #0
+						"What authors are in the session or workshop", #1
+						"Will this author be in the session or workshop", #2
+						"What session or workshop will this author be in", #3
+						"Recommend a session or workshop related to", #4
+						"Recommend a session or workshop author is in and related to", #5
+						"What papers does the session cover", #6
+						"Recommend a session related to this author's works", #7
+						"What are some sessions related to this author's works", #8
+						"What are accepted papers in the session", #9
+						"What are some papers about in the session", #10
+						"Papers related to", #11
+						"What are some papers about", #12
+						"Give me papers made by", #13
+						"Papers written by"] #14
 
 		#Rejection and acceptance keywords
 		self.other_intents = {
@@ -68,13 +62,13 @@ class QueryClassification:
 		self.tagger = SequenceTagger.load("flair/ner-english-large")
 
 		self.dense_index = DenseRetriever(self.model)
-		if os.path.exists('{}/index.pkl'.format(params['pickle_path'])):
+		if os.path.exists('{}/ques_index.pkl'.format(params['index path'])):
 			print("true") #testing purposes
-			self.dense_index.load_index('{}/index.pkl'.format(params['pickle_path']))
+			self.dense_index.load_index('{}/ques_index.pkl'.format(params['index path']))
 		else:
 			print("false") #testing purposes
 			self.dense_index.create_index_from_documents(self.ques_list)
-			self.dense_index.save_index(index_path='{}/index.pkl'.format(params['pickle_path']), vectors_path='{}/vectors.pkl'.format(params['pickle_path']))
+			self.dense_index.save_index(index_path='{}/ques_index.pkl'.format(params['index path']), vectors_path='{}/ques_vectors.pkl'.format(params['index path']))
 	
 	#Testing purposes
 	def serve(self, port=80):
@@ -99,10 +93,6 @@ class QueryClassification:
 			results = json.dumps(temp, indent=4)
 			return results
 	
-	#Tetsing purposes only
-	def add_message(self, msg):
-		self.conv_list.insert(0, msg)
-	
 	def find_word(self, q, pattern):
 		"""
 		Checks if a given str contains specified pattern.
@@ -114,7 +104,7 @@ class QueryClassification:
 		Returns:
 			A match object is q contains pattern, else None.
 		"""
-		return re.search(r'\b{0}\b'.format(pattern), q, flags=re.IGNORECASE)
+		return re.search(pattern, q, flags=re.IGNORECASE)
 	
 	def check_other_intents(self, conv_list, intent): #'reject' or 'acceptance'
 		"""
@@ -229,19 +219,41 @@ class QueryClassification:
 		Returns:
 			A DialogueAct.
 		"""
-		intent_dict = self.chack_main_intent(conv_list)
-		conference = self.main_conference(self.conv_list)
-		entity = self.entity_keywords(self.conv_list)
-		authors = self.get_authors(self.conv_list)
+		last_DA = None
+		last_similarity = 0
+		intent_dict = None
+		conference = None
+		entity = None
+		authors = None
+		flag = True
+		if len(self.params['DA list']) > 0 and self.params['DA list'][0]['flag'] and (self.params['DA list'][0]['index'] in range (7,9) or self.params['DA list'][0]['index'] in range (13,15)):
+			last_DA = self.params['DA list'][0]
+			intent_dict = {'intent': 'question', 'intent index': self.params['DA list'][0]['index']}
+			conference = self.params['DA list'][0]['main conference']
+			entity = self.params['DA list'][0]['entity']
+			authors = self.params['DA list'][0]['authors']
+			flag = False
+		else:
+			intent_dict = self.chack_main_intent(conv_list)
+			if intent_dict['intent'] == 'acceptance':
+				last_similarity = self.params['DA list'][1]['last similarity'] + 1
+
+			conference = self.main_conference(conv_list)
+			entity = self.entity_keywords(conv_list)
+			authors = self.get_authors(conv_list)
 		return {'intent': intent_dict['intent'],
 				'index': intent_dict['intent index'],
 				'main conference': conference,
 				'entity': entity,
-				'authors': authors}
+				'authors': authors,
+				'last similarity': last_similarity,
+				'error str': None,
+				'last DA': last_DA,
+				'flag': flag}
 	
 if __name__ == "__main__": #TESTING PURPOSES
 	#conv_list = ["Is Catherine Qi going to be at SIGIR?"]
-	params = {'pickle_path': 'D:/ERSP/chatbot/input_handler'}
+	params = {'index path': 'D:/ERSP/chatbot/input_handler'}
 	q = QueryClassification(params)
 	#da = q.create_DA(q.conv_list)
 	#print(da['intent'])
