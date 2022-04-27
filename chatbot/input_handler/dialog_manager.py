@@ -59,6 +59,26 @@ class DialogManager:
     def action_detection(self, conv_list):
         self.params['DA list'].insert(0, self.QC.create_DA(conv_list))
     
+    def conv_logic(self, index, conv_list):
+        if index in range(0,2):
+            return {'conf author': actions.ConferenceAction.run(conv_list, self.params)}
+        if index == 2:
+            return {'author check': actions.ConferenceAction.run(conv_list, self.params)}
+        if index == 3:
+            return {'where author': actions.ConferenceAction.run(conv_list, self.params)}
+        if index in range(4,6):
+            return {'conf rec': actions.ConferenceAction.run(conv_list, self.params)}
+        if index == 6:
+            return {'session papers': actions.ConferenceAction.run(conv_list, self.params)}
+        if index in range(7,9):
+            return {'title ques': actions.QuestionAction.run(conv_list, self.params)}
+        if index in range(9,11):
+            return {'conf paper title rec': actions.ConferenceAction.run(conv_list, self.params)}
+        if index in range(11,13):
+            return {'paper qa': actions.RetrievalAction.run(conv_list, self.params)}
+        if index in range(13,15):
+            return {'title ques': actions.QuestionAction.run(conv_list, self.params)}
+    
     def dispatch(self, conv_list):
         self.action_detection(conv_list)
         self.info_needed()
@@ -71,18 +91,10 @@ class DialogManager:
         if intent == 'question':
             if curr_da['last DA'] is not None:
                 if index in range(7,9):
-                    return {'conf qa': actions.ConferenceAction.run(conv_list, self.params)}
+                    return {'userprofile': actions.ConferenceAction.run(conv_list, self.params)}
                 if index in range(13,15):
-                    return {'paper qa': actions.RetrievalAction.run(conv_list, self.params)}
-            if index in range(0,11):
-                if index in range(7,9):
-                    return {'title ques': actions.QuestionAction.run(conv_list, self.params)}
-                return {'conf qa': actions.ConferenceAction.run(conv_list, self.params)}
-            if index in range(11,15):
-                if index in range(13,15):
-                    return {'title ques': actions.QuestionAction.run(conv_list, self.params)}
-                print(curr_da['authors'])
-                return {'paper qa': actions.RetrievalAction.run(conv_list, self.params)}
+                    return {'userprofile': actions.RetrievalAction.run(conv_list, self.params)}
+            return self.conv_logic(index, conv_list)
         if intent == 'reject':
             return {'inquire': actions.QuestionAction.run(conv_list, self.params)}
         if intent == 'acceptance':
@@ -92,10 +104,7 @@ class DialogManager:
                     curr_da[key] = self.params['DA list'][1][key] + 1
                 else:
                     curr_da[key] = self.params['DA list'][1][key]
-            if last_index in range(0,11):
-                return {'conf accept': actions.ConferenceAction.run(conv_list, self.params)}
-            if last_index in range(11,15):
-                return {'paper accept': actions.RetrievalAction.run(conv_list, self.params)}
+            return self.conv_logic(last_index, conv_list)
 
 if __name__ == "__main__": #TESTING PURPOSES
     params = {'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json',
@@ -108,4 +117,4 @@ if __name__ == "__main__": #TESTING PURPOSES
     #print(DM.dispatch(conv_list))
     #print(DM.params['DA list'][0])
     DM.serve(9000)
-    
+        
