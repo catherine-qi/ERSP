@@ -4,15 +4,10 @@ from sentence_transformers import SentenceTransformer
 from ..retriever.dense_retriever import DenseRetriever
 from ..retriever.sparse_retriever import SparseRetriever
 from ..retriever.paper_retriever import PaperRetrieval
-from flask import request, Flask, jsonify
-from flask_cors import CORS
 
 class ConferenceRetrieval():
     def __init__(self, params):
         self.params = params
-
-        self.app = Flask(__name__)
-        CORS(self.app)
 
         self.data = self.get_data()
 
@@ -20,21 +15,8 @@ class ConferenceRetrieval():
         self.dense_index = DenseRetriever(self.model)
 
         self.sparse_retriever = SparseRetriever()
-    
-    #Testing purposes
-    def serve(self, port=80):
-        self.build_endpoints()
-        self.app.run(host='0.0.0.0', port=port)
-    
-    #Testing purposes
-    def build_endpoints(self):
-        @self.app.route('/encode', methods=['POST', 'GET'])
-        def encode_endpoint():
-            temp = "test"
-            results = json.dumps(temp, indent=4)
-            return results
-    
-    #'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json'
+
+
     def get_data(self):
         data = None
         with open(self.params['conf dataset'], 'r') as f:
@@ -76,7 +58,7 @@ class ConferenceRetrieval():
         
         session_names = self.get_attr(wanted_conf, entities[0], 'name')
         self.sparse_retriever.index_documents(session_names)
-        sparse_results = self.sparse_retriever.search([conv_list[0]])[0]
+        sparse_results = self.sparse_retriever.search([conv_list[0].text])[0]
         sparse_results = [r[0] for r in sparse_results][0]
 
         return self.search(wanted_conf, entities[0], session_names[sparse_results])['date']
@@ -90,7 +72,7 @@ class ConferenceRetrieval():
         for entity in entities:
             valid = self.get_attr(wanted_conf, entity, 'name')
             self.sparse_retriever.index_documents(valid)
-            sparse_results = self.sparse_retriever.search([conv_list[0]])[0]
+            sparse_results = self.sparse_retriever.search([conv_list[0].text])[0]
             sparse_results = [i[0] for i in sparse_results][0]
             names.append(valid[sparse_results])
         
@@ -110,16 +92,16 @@ class ConferenceRetrieval():
 
         author_list = self.author_list(conv_list)
         
-        is_in = True
+        is_in = []
         missing_authors = []
         for a in authors:
             flag = False
             for arr in author_list:
                 if a in arr:
                     flag = True
+                    is_in.append(a)
             if not flag:
                 missing_authors.append(a)
-            is_in = is_in and flag
         return{'is in': is_in, 'missing authors': missing_authors}
     
     def where_author(self):
@@ -177,7 +159,7 @@ class ConferenceRetrieval():
                 for t in titles:
                     large_str = large_str + ' ' + t
                 self.dense_index.create_index_from_documents([large_str])
-                dense_results = self.dense_index.search([conv_list[0]])[0]
+                dense_results = self.dense_index.search([conv_list[0].text])[0]
                 dense_results = [i[1] for i in dense_results][0]
                 similarities.append(dense_results)
             recommendations[entity] = names[similarities.index(max(similarities))]
@@ -189,14 +171,14 @@ class ConferenceRetrieval():
         wanted_conf = curr_da['main conference']['conference'] + curr_da['main conference']['year']
         entities = curr_da['entity']
 
-        if len(entities) > 1 or entities[0] != 'session':
+        if 'session' not in entities:
             return 'only session has papers'
         
         names = self.get_attr(wanted_conf, 'session', 'name')
         self.sparse_retriever.index_documents(names)
-        sparse_results = self.sparse_retriever.search([conv_list[0]])[0]
+        sparse_results = self.sparse_retriever.search([conv_list[0].text])[0]
         sparse_results = [i[0] for i in sparse_results][0]
-        titles = self.search(wanted_conf, entities[0], names[sparse_results])['paper titles']
+        titles = self.search(wanted_conf, 'session', names[sparse_results])['paper titles']
         return titles
     
     def best_paper_title(self, conv_list):
@@ -209,20 +191,19 @@ class ConferenceRetrieval():
         titles = self.get_papers(conv_list)
         print(titles)
         self.dense_index.create_index_from_documents(titles)
-        dense_results = self.dense_index.search([conv_list[0]])[0]
+        dense_results = self.dense_index.search([conv_list[0].text])[0]
         dense_results = [i[0] for i in dense_results][0]
         return titles[dense_results]
 
     def related_author_session(self, conv_list, paper_retrieval):
         curr_da = self.params['DA list'][0]
+        curr_da['authors'] = [curr_da['authors'][0]]
         authors = curr_da['authors']
 
-        title_flag = True
-        if title_flag:
-            author_data = paper_retrieval.user_profile(authors[0], conv_list[0])
-            author_data = " ".join(author_data)
-            recommendation = self.best_entity([author_data])
-            return recommendation
+        author_data = paper_retrieval.user_profile(authors[0], conv_list[0].text)
+        author_data = " ".join(author_data)
+        recommendation = self.best_entity(conv_list)
+        return recommendation
     
     def get_results(self, conv_list, index):
         if index in range(0,2):
@@ -239,16 +220,3 @@ class ConferenceRetrieval():
             return self.related_author_session(conv_list, self.params['actions']['retrieval'])
         if index in range(9,11):
             return self.best_paper_title(conv_list)
-    
-if __name__ == "__main__":
-    params = {'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json',
-                             'index path': 'D:/ERSP/chatbot/input_handler',
-                             'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json',
-                             'DA list': [{'intent': 'question',
-				                        'index': 0,
-				'main conference': {'conference': 'SIGIR', 'year': '2021'},
-				'entity': ['session'],
-				'authors': ['Hamed Zamani']}]}
-    c = ConferenceRetrieval(params)
-    p = PaperRetrieval(params)
-    print(c.related_author_session(['Conversational Information Seeking'], p))

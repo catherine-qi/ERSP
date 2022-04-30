@@ -1,11 +1,15 @@
+import util
+
 from random import randrange
 from ..output_handler.output_selection import OutputProcessing
+from ..interaction_handler.msg import Message
 
 class SimpleOutputSelection(OutputProcessing):
-    def __init__(params):
+    def __init__(self, params):
         super().__init__(params)
     
     def output_selection(self, conv_list, candidate_outputs):
+        print(self.params['DA list'])
         curr_DA = self.params['DA list'][0]
         authors = curr_DA['authors']
         entities = curr_DA['entity']
@@ -13,9 +17,10 @@ class SimpleOutputSelection(OutputProcessing):
         if 'error msg' in candidate_outputs:
             return candidate_outputs['error msg']
         
+        #change
         if 'conf author' in candidate_outputs:
             result = candidate_outputs['conf author']
-            authors = ', '.join(str(ele) for ele in result)
+            authors = ', '.join(', '.join(str(e) for e in ele) for ele in result)
             self.conf_author = ['{} will be there.'.format(authors),
                                 '{} is going to be there.'.format(authors),
                                 '{} will be presenting.'.format(authors),
@@ -25,25 +30,25 @@ class SimpleOutputSelection(OutputProcessing):
             return self.conf_author[index]
         
         if 'author check' in candidate_outputs:
-            is_in = candidate_outputs['is in']
-            missing_authors = candidate_outputs['missing authors']
+            is_in = candidate_outputs['author check']['is in']
+            missing_authors = candidate_outputs['author check']['missing authors']
             result = ''
             if len(is_in) > 0:
                 in_authors = ', '.join(str(ele) for ele in is_in)
-                self.author_check_yes = ['{in_authors} will be present.'.format(authors),
-                                         '{in_authors} will be participating.'.format(authors),
-                                         '{in_authors} will be there.'.format(authors),
-                                         '{in_authors} is going to be there.'.format(authors),
-                                         '{in_authors} will be presenting.'.format(authors)]
+                self.author_check_yes = ['{} will be present.'.format(in_authors),
+                                         '{} will be participating.'.format(in_authors),
+                                         '{} will be there.'.format(in_authors),
+                                         '{} is going to be there.'.format(in_authors),
+                                         '{} will be presenting.'.format(in_authors)]
                 index = randrange(len(self.author_check_yes))
                 result = self.author_check_yes[index]
             if len(missing_authors) > 0:
                 miss_authors = ', '.join(str(ele) for ele in missing_authors)
-                self.author_check_no = ['{miss_authors} will not be present'.format(authors),
-                                        '{miss_authors} will not be participating.'.format(authors),
-                                        '{miss_authors} will not be there'.format(authors),
-                                        '{miss_authors} is not there'.format(authors),
-                                        '{miss_authors} is not going to be there'.format(authors)]
+                self.author_check_no = ['{} will not be present'.format(miss_authors),
+                                        '{} will not be participating.'.format(miss_authors),
+                                        '{} will not be there'.format(miss_authors),
+                                        '{} is not there'.format(miss_authors),
+                                        '{} is not going to be there'.format(miss_authors)]
                 index = randrange(len(self.author_check_no))
                 result += self.author_check_no[index]
             return result
@@ -51,12 +56,13 @@ class SimpleOutputSelection(OutputProcessing):
         if 'where author' in candidate_outputs:
             a = ', '.join(str(ele) for ele in authors)
             result = []
-            for key in candidate_outputs['where author'].keys():
-                if len(candidate_outputs['where author'][key]) > 0:
-                    result.append(candidate_outputs['where author'][key])
+            for a in authors:
+                for key in candidate_outputs['where author'][a]:
+                    if len(candidate_outputs['where author'][a][key]) > 0:
+                        result.append(candidate_outputs['where author'][a][key])
             
             if len(result) > 0:
-                ans = ', '.join(str(ele) for ele in result)
+                ans = ', '.join(', '.join(str(e) for e in ele) for ele in result)
                 self.where_author = ['{} will be at {}.'.format(a, ans),
                                     '{} is going to be at {}.'.format(a, ans),
                                     '{} will be participating at {}.'.format(a, ans),
@@ -77,7 +83,7 @@ class SimpleOutputSelection(OutputProcessing):
             result = candidate_outputs['conf rec']
             ans = ''
             for entity in entities:
-                ans += entity.capitalize() + ': ' + result['entity'] + '\n'
+                ans += entity.capitalize() + ': ' + result[entity] + '\n'
 
             self.conf_rec = ['I recommend the following you:\n {}.'.format(ans),
                              'Based on your preferences, I recommend:\n {}.'.format(ans),
@@ -101,11 +107,14 @@ class SimpleOutputSelection(OutputProcessing):
         if 'userprofile' in candidate_outputs:
             result = candidate_outputs['userprofile']
             a = authors[0]
-            self.userprofile = ['I found that {} is best related to {}\'s works.'.format(result, a),
-                                '{} is most related to {}\'s works.'.format(result, a),
-                                'I recommend {} to be most related to {}\'s works.'.format(result, a),
-                                '{} seems to be of close topic in relation to {}\'s works'.format(result, a),
-                                'Based on {}\'s works, {} is what you\'re looking for.'.format(a, result)]
+            ans = ''
+            for entity in entities:
+                ans += entity.capitalize() + ': ' + result[entity] + '\n'
+            self.userprofile = ['I found this to be is best related to {}\'s works:\n {}'.format(a, ans),
+                                'This is most related to {}\'s works:\n {}'.format(a, ans),
+                                'I recommend this to be most related to {}\'s works:\n {}'.format(a, ans),
+                                'This seems to be of close topic in relation to {}\'s works:\n {}'.format(a, ans),
+                                'Based on {}\'s works, I think this is what you\'re looking for:\n {}'.format(a, ans)]
             index = randrange(len(self.userprofile))
             return self.userprofile[index]
 
@@ -128,6 +137,9 @@ class SimpleOutputSelection(OutputProcessing):
                              'It seems that {} is closely related to your preferences.'.format(result)]
             index = randrange(len(self.paper_qa))
             return self.paper_qa[index]
+        
+        if 'title ques' in candidate_outputs:
+            return candidate_outputs['title ques']
     
     def get_output(self, conv, candidate_outputs):
         user_id = conv[0].user_id
@@ -144,7 +156,7 @@ class SimpleOutputSelection(OutputProcessing):
             k = key 
         msg_info['msg_creator'] = k
 
-        #timestamp = util.current_time_in_milliseconds()
-        #if timestamp <= conv[0].timestamp:
-        #    raise Exception('There is a problem in the output timestamp!')
-        #return Message(user_interface, user_id, user_info, msg_info, text, timestamp)
+        timestamp = util.current_time_in_milliseconds()
+        if timestamp <= conv[0].timestamp:
+            raise Exception('There is a problem in the output timestamp!')
+        return Message(user_interface, user_id, user_info, msg_info, text, timestamp)

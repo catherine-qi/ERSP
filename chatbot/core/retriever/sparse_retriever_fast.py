@@ -4,7 +4,6 @@ import tantivy
 
 from tqdm import tqdm
 
-
 class SparseRetrieverFast:
     def __init__(self, path='sparse_index', load=True):
         if not os.path.exists(path):

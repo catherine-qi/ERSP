@@ -51,7 +51,7 @@ class PaperRetrieval():
     
     #returns best papers related to query in arXiv dataset, LOTS OF CODE DUPLICATION!!
     def paper_search(self, conv_list):
-        results = self.dense_index.search([conv_list[0]])[0]
+        results = self.dense_index.search([conv_list[0].text])[0]
         results = [i[1] for i in results][0]
         title = self.col.find_one({'index': results})
         return title
@@ -117,8 +117,8 @@ class PaperRetrieval():
                 big_str = ''
                 if entry['title'] is not None:
                     big_str = entry['title']
-                    if entry['abstract'] is not None:
-                        big_str = big_str + ' ' + entry['abstract']
+                    #if entry['abstract'] is not None:
+                    #    big_str = big_str + ' ' + entry['abstract']
                     author_works.append(big_str)
         return author_works
     
@@ -126,7 +126,7 @@ class PaperRetrieval():
         if index in range(11,13):
             return self.paper_search(conv_list)
         if index in range(13,15):
-            return self.user_profile(self.params['DA list'][0]['authors'][0], conv_list[0])
+            return self.user_profile(self.params['DA list'][0]['authors'][0], conv_list[0].text)
 
 if __name__ == "__main__":
     p = PaperRetrieval({'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json', #change this to location of arxiv_parsed.json
