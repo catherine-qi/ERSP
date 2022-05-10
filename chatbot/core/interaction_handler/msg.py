@@ -3,7 +3,6 @@ The message used to represent each interaction in Macaw.
 Authors: Hamed Zamani (hazamani@microsoft.com)
 """
 
-
 class Message:
     def __init__(self, user_interface, user_id, user_info, msg_info, text, timestamp):
         """
