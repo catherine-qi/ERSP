@@ -1,5 +1,9 @@
 # <PROJECT_NAME>: A Retrieval-Based QA Dialogue System on Scientific Conferences
-An ERSP project, supervised by Professor Hamed Zamani, under the Center of Intelligent Information Retrieval (CIIR) lab at UMass Amherst. <PROJECT_NAME> is a task-oriented dialogue system that recommends conference events and research papers to users, and answers simple factual questions about conference events (option selection). It can make recommendations based on keywords or userprofiles, which is built off a specified author's works. Below are some screenshots of the bot in use via the telgram interface. The left screenshot is of option selection, while the right is of recommendation.
+An ERSP project, supervised by Professor Hamed Zamani, under the Center of Intelligent Information Retrieval (CIIR) lab at UMass Amherst. <PROJECT_NAME> is a task-oriented dialogue system that recommends conference events and research papers to users, and answers simple factual questions about conference events (option selection). It can make recommendations based on keywords or userprofiles, which is built off a specified author's works.
+
+The given conference dataset, which was manually extracted, is only of SIGIR 21, so it can only support queries related to that conference as of currently. Currently, we don't have an automatic parser to extract this kind of data from any conference website.
+
+Below are some screenshots of the bot in use via the telgram interface. The left screenshot is of option selection, while the right is of recommendation.
 
 ![Screenshots of <PROJECT_NAME> in use](example-2.PNG)
 ![Screenshots of <PROJECT_NAME> in use](example-1.PNG)
