@@ -5,7 +5,7 @@ An ERSP project, supervised by Professor Hamed Zamani, under the Center of Intel
 ![Screenshots of <PROJECT_NAME> in use](example-1.PNG)
 
 ## <PROJECT_NAME> Architecture
-<PROJECT_NAME> follows the Macaw framework, a platform with modular architecture meant for conversational information seeking (CIS) research. The high-level architecture of <PROJECT_NAME> is shown below:
+<PROJECT_NAME> follows the Macaw framework, a platform with modular architecture meant for conversational information seeking (CIS) research. The interface is implemented via Macaw, so the communication between the dialogue system and user is aided by Macaw. The high-level architecture of <PROJECT_NAME> is shown below:
 
 ![The high-level architecture of <PROJECT_NAME>](project-name-arch.png)
 
