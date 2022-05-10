@@ -58,16 +58,22 @@ if __name__ == '__main__':
     # database, as well as the database name.
     db_params = {'interaction_db_host': 'localhost',
                  'interaction_db_port': 27017,
-                 'interaction_db_name': 'macaw_test'}
+                 'interaction_db_name': 'macaw_test',
+                 'paper_db_host': 'localhost',
+                 'paper_db_port': 27017,
+                 'paper_db_name': 'Papers',
+                 'paper_db_collection_name': 'arXiv'}
 
     # These are interface parameters. They are interface specific.
-    interface_params = {'interface': 'stdio'}
+    interface_params = {'interface': 'telegram', # interface can be 'telegram' or 'stdio' for live mode, and 'fileio'
+                                                 # for exp mode.
+                        'bot_token': '5308156840:AAGyns9WKdyCXw07v0SrZvdy4w_acUGs0O0'} # Telegram bot token.
 
     # These are parameters used by the retrieval model.
-    retrieval_params = {'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json',
-                        'index path': 'D:/ERSP/chatbot/input_handler',
-                        'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json',
-                        'DA list': []}
+    retrieval_params = {'conf dataset': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\conference_data.json', # The location of the conference dataset.
+                        'index path': 'D:/ERSP/chatbot/input_handler', # The location the indexes files are/will be stored at.
+                        'arxiv path': 'C:\\Users\\snipe\\Documents\\GitHub\\ERSP\\arxiv_parsed.json', #The location of the arXiv dataset.
+                        'DA list': []} #List of dialogue acts
 
     params = {**basic_params, **db_params, **interface_params, **retrieval_params}
     basic_params['logger'].info(params)
