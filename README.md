@@ -9,7 +9,7 @@ Below are some screenshots of the bot in use via the telgram interface. The left
 ![Screenshots of ReCo in use](example-1.PNG)
 
 ## ReCo Architecture
-ReCo follows the Macaw framework, a platform with modular architecture meant for conversational information seeking (CIS) research. The interface is implemented via Macaw, so the communication between the dialogue system and user is aided by Macaw. The high-level architecture of <PROJECT_NAME> is shown below:
+ReCo follows the Macaw framework, a platform with modular architecture meant for conversational information seeking (CIS) research. The interface is implemented via Macaw, so the communication between the dialogue system and user is aided by Macaw. The high-level architecture of ReCo is shown below:
 
 ![The high-level architecture of ReCo](reco-arch.png)
 
