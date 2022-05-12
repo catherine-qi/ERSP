@@ -1,17 +1,17 @@
-# <PROJECT_NAME>: A Retrieval-Based QA Dialogue System on Scientific Conferences
-An ERSP project, supervised by Professor Hamed Zamani, under the Center of Intelligent Information Retrieval (CIIR) lab at UMass Amherst. <PROJECT_NAME> is a task-oriented dialogue system that recommends conference events and research papers to users, and answers simple factual questions about conference events (option selection). It can make recommendations based on keywords or userprofiles, which is built off a specified author's works.
+# ReCo: A Retrieval-Based QA Dialogue System on Scientific Conferences
+An ERSP project, supervised by Professor Hamed Zamani, under the Center of Intelligent Information Retrieval (CIIR) lab at UMass Amherst. ReCo is a task-oriented dialogue system that recommends conference events and research papers to users, and answers simple factual questions about conference events (option selection). It can make recommendations based on keywords or userprofiles, which is built off a specified author's works.
 
 The given conference dataset, which was manually extracted, is only of SIGIR 21, so it can only support queries related to that conference as of right now. Currently, we don't have an automatic parser to extract this kind of data from any conference website.
 
 Below are some screenshots of the bot in use via the telgram interface. The left screenshot is of option selection, while the right is of recommendation.
 
-![Screenshots of <PROJECT_NAME> in use](example-2.PNG)
-![Screenshots of <PROJECT_NAME> in use](example-1.PNG)
+![Screenshots of ReCo in use](example-2.PNG)
+![Screenshots of ReCo in use](example-1.PNG)
 
-## <PROJECT_NAME> Architecture
-<PROJECT_NAME> follows the Macaw framework, a platform with modular architecture meant for conversational information seeking (CIS) research. The interface is implemented via Macaw, so the communication between the dialogue system and user is aided by Macaw. The high-level architecture of <PROJECT_NAME> is shown below:
+## ReCo Architecture
+ReCo follows the Macaw framework, a platform with modular architecture meant for conversational information seeking (CIS) research. The interface is implemented via Macaw, so the communication between the dialogue system and user is aided by Macaw. The high-level architecture of <PROJECT_NAME> is shown below:
 
-![The high-level architecture of <PROJECT_NAME>](project-name-arch.png)
+![The high-level architecture of ReCo](reco-arch.png)
 
 #### Retrieval
 Recommendations are made via a dense retrieval model, which employs the SentenceTransformers and Faiss library. A sparse retrieval model, using BM25 as the ranking function, is also used to detect what conference event the user may be referring to for option selection.
